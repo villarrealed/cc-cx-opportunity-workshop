@@ -1,0 +1,12 @@
+# Internal project artifacts (not for public repo)
+MASTER_PROJECT.md
+
+# Screenshots and PDFs from design iterations
+*.png
+*.pdf
+
+# OS / editor cruft
+.DS_Store
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CC/CX Opportunity Identification Framework | Cisco</title>
+  <style>
+    :root {
+      --cisco-blue: #3070E7;
+      --cisco-dark-blue: #0F1729;
+      --cisco-navy: #07182D;
+      --cisco-teal: #16BDEB;
+      --cisco-cyber-blue: #00C8FF;
+      --cisco-green: #22C55E;
+      --cisco-yellow: #F59E0B;
+      --cisco-orange: #FF9000;
+      --cisco-red: #EF4444;
+      --cisco-light-gray: #F8FAFC;
+      --cisco-gray: #64748B;
+      --ink: #10243F;
+      --line: #D8E1EE;
+      --nav-width: 314px;
+      --shadow-lg: 0 24px 60px rgba(7,24,45,.14);
+      --shadow-md: 0 14px 34px rgba(15,23,41,.08);
+      --shadow-sm: 0 8px 22px rgba(15,23,41,.05);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: linear-gradient(180deg, #f4f8fd 0%, #eef4fb 100%); }
+    body {
+      margin: 0;
+      font-family: "CiscoSans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(22,189,235,.08), transparent 24%),
+        linear-gradient(180deg, #f4f8fd 0%, #eef4fb 100%);
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .layout { display: flex; min-height: 100vh; align-items: flex-start; }
+    .sidebar {
+      position: sticky; top: 0; width: var(--nav-width); min-width: var(--nav-width); height: 100vh;
+      padding: 28px 22px 24px; overflow-y: auto; color: #fff;
+      background:
+        linear-gradient(180deg, rgba(0,200,255,.16), transparent 22%),
+        linear-gradient(160deg, var(--cisco-dark-blue) 0%, var(--cisco-navy) 72%, #031120 100%);
+      box-shadow: inset -1px 0 0 rgba(255,255,255,.08);
+    }
+    .brand-tag {
+      display: inline-flex; align-items: center; gap: 10px; padding: 7px 12px; border-radius: 999px;
+      font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+      background: rgba(255,255,255,.08); color: rgba(255,255,255,.92); border: 1px solid rgba(255,255,255,.12);
+    }
+    .brand-tag::before {
+      content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--cisco-cyber-blue);
+      box-shadow: 0 0 18px rgba(0,200,255,.75);
+    }
+    .sidebar h1 { margin: 18px 0 10px; font-size: 29px; line-height: 1.08; font-weight: 300; letter-spacing: -.03em; }
+    .sidebar .audience, .sidebar .purpose, .sidebar .meta { margin: 0; color: rgba(255,255,255,.82); }
+    .sidebar .audience { font-size: 14px; font-weight: 600; color: #fff; }
+    .sidebar .purpose { margin-top: 12px; font-size: 14px; }
+    .sidebar .meta { margin-top: 16px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+    .nav-block { margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.1); }
+    .nav-label { margin: 0 0 12px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+    .nav-list { display: grid; gap: 8px; }
+    .nav-link {
+      display: block; padding: 12px 14px; border-radius: 14px; text-decoration: none;
+      color: rgba(255,255,255,.84); background: rgba(255,255,255,.03); border: 1px solid transparent;
+      transition: background .2s ease, transform .2s ease, border-color .2s ease, color .2s ease;
+    }
+    .nav-link:hover, .nav-link:focus-visible {
+      background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.12); color: #fff; transform: translateX(2px); outline: none;
+    }
+    .nav-link.active {
+      color: #fff; background: linear-gradient(90deg, rgba(48,112,231,.34), rgba(0,200,255,.12));
+      border-color: rgba(0,200,255,.28); box-shadow: inset 3px 0 0 var(--cisco-cyber-blue);
+    }
+    .nav-link span { display: block; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 3px; }
+    .sidebar-note {
+      margin-top: 28px; padding: 16px; border-radius: 16px; background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.82); font-size: 13px;
+    }
+    .content { flex: 1; min-width: 0; padding: 34px 34px 40px; }
+    .hero, .section-card, .footer-card {
+      background: rgba(255,255,255,.9); backdrop-filter: blur(12px); border: 1px solid rgba(216,225,238,.9); box-shadow: var(--shadow-md);
+    }
+    .hero { position: relative; overflow: hidden; padding: 36px 38px; border-radius: 28px; margin-bottom: 22px; }
+    .hero::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(circle at 92% 10%, rgba(22,189,235,.18), transparent 25%),
+        linear-gradient(135deg, rgba(48,112,231,.08), transparent 42%);
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px; color: var(--cisco-blue);
+      font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700;
+    }
+    .eyebrow::before { content: ""; width: 38px; height: 1px; background: linear-gradient(90deg, var(--cisco-blue), var(--cisco-cyber-blue)); }
+    .hero h2 {
+      margin: 0; max-width: 980px; font-size: clamp(34px, 4vw, 52px); line-height: 1.02;
+      letter-spacing: -.045em; font-weight: 300; color: var(--cisco-dark-blue);
+    }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(280px, 1fr); gap: 24px; align-items: end; margin-top: 20px; }
+    .hero-copy p { margin: 0; max-width: 840px; font-size: 18px; color: #314763; }
+    .hero-panel {
+      padding: 18px 18px 16px; border-radius: 18px; color: white; box-shadow: var(--shadow-sm);
+      background: linear-gradient(180deg, rgba(15,23,41,.98), rgba(7,24,45,.96));
+    }
+    .hero-panel strong { display: block; margin-bottom: 10px; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.62); }
+    .hero-panel p { margin: 0; font-size: 15px; line-height: 1.5; color: rgba(255,255,255,.92); }
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 13px; border-radius: 999px; font-size: 13px; font-weight: 600;
+      color: var(--cisco-dark-blue); background: #fff; border: 1px solid rgba(48,112,231,.14); box-shadow: 0 8px 20px rgba(15,23,41,.05);
+    }
+    .chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(180deg, var(--cisco-blue), var(--cisco-teal)); }
+    .plain-language-callout, .translation-callout, .warning-callout, .reframe-callout, .unit-progress, .persona-rule {
+      margin-top: 18px; padding: 18px 20px; border-radius: 18px; border: 1px solid transparent;
+    }
+    .plain-language-callout, .translation-callout, .reframe-callout, .unit-progress {
+      background: linear-gradient(135deg, rgba(48,112,231,.08), rgba(0,200,255,.06)); border-color: rgba(48,112,231,.16); color: var(--cisco-dark-blue);
+    }
+    .warning-callout, .persona-rule {
+      background: linear-gradient(135deg, rgba(245,158,11,.14), rgba(255,144,0,.08)); border-color: rgba(255,144,0,.28); color: #5b3907;
+    }
+    .plain-language-callout > strong, .translation-callout > strong, .warning-callout > strong, .persona-rule > strong {
+      display: block; margin-bottom: 6px; font-size: 14px; letter-spacing: .04em; text-transform: uppercase;
+    }
+    .section-card { position: relative; padding: 28px 30px 30px; border-radius: 22px; margin-bottom: 22px; scroll-margin-top: 24px; }
+    .section-header { display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start; margin-bottom: 20px; }
+    .section-number {
+      display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px;
+      background: linear-gradient(180deg, var(--cisco-blue), #2458bb); color: white; font-weight: 700; font-size: 22px;
+      box-shadow: 0 12px 24px rgba(48,112,231,.3);
+    }
+    .section-title-wrap h3 { margin: 0; font-size: clamp(26px, 3vw, 34px); line-height: 1.08; letter-spacing: -.035em; font-weight: 350; color: var(--cisco-dark-blue); }
+    .section-title-wrap p { margin: 8px 0 0; font-size: 16px; color: var(--cisco-gray); }
+    .lead { font-size: 18px; color: #293f5c; margin: 0 0 18px; }
+    .step-stack { display: grid; gap: 18px; margin-top: 20px; }
+    .step-card {
+      border-radius: 22px; border: 1px solid #dce7f4; background: linear-gradient(180deg, #fff, #f8fbff); box-shadow: var(--shadow-sm); overflow: hidden;
+    }
+    .step-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 18px 20px 0; }
+    .step-kicker {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cisco-blue);
+    }
+    .step-kicker::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: linear-gradient(180deg, var(--cisco-blue), var(--cisco-teal)); }
+    .step-card h4 { margin: 8px 0 8px; font-size: 26px; line-height: 1.1; letter-spacing: -.03em; font-weight: 400; color: var(--cisco-dark-blue); }
+    .step-card-body { padding: 0 20px 20px; }
+    .step-card-body p { margin: 0; color: var(--cisco-gray); font-size: 16px; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px 18px; margin-top: 18px; }
+    .form-row { display: grid; gap: 8px; }
+    .form-row.span-2 { grid-column: 1 / -1; }
+    .form-row label { font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--cisco-dark-blue); }
+    .helper-text { font-size: 13px; color: var(--cisco-gray); margin-top: -2px; }
+    .form-row input, .form-row textarea {
+      width: 100%; border: 1px solid #cfe0f4; border-radius: 14px; padding: 13px 14px; font: inherit; color: var(--ink);
+      background: linear-gradient(180deg, #fff, #fbfdff); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
+      transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .form-row input { min-height: 50px; }
+    .form-row textarea { min-height: 104px; resize: vertical; }
+    .form-row textarea.short { min-height: 86px; }
+    .form-row input:focus, .form-row textarea:focus {
+      outline: none; border-color: var(--cisco-blue); box-shadow: 0 0 0 4px rgba(48,112,231,.12); background: #fff;
+    }
+    .form-note { margin-top: 12px; font-size: 14px; color: var(--cisco-gray); }
+    .prompt-card {
+      position: relative; border-radius: 24px; overflow: hidden; border: 1px solid rgba(0,200,255,.18);
+      background: linear-gradient(165deg, #07182d 0%, #0f274b 45%, #12315c 100%);
+      box-shadow: 0 24px 60px rgba(7,24,45,.24), inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    .prompt-card::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(circle at top right, rgba(0,200,255,.14), transparent 28%), linear-gradient(135deg, rgba(48,112,231,.14), transparent 48%);
+    }
+    .prompt-toolbar {
+      position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 20px 0;
+    }
+    .prompt-meta strong { display: block; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.66); margin-bottom: 6px; }
+    .prompt-meta p { margin: 0; font-size: 20px; line-height: 1.2; letter-spacing: -.02em; color: #fff; max-width: 740px; }
+    .prompt-actions { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+    .button-primary, .button-secondary {
+      border: none; border-radius: 14px; padding: 14px 18px; font: inherit; font-weight: 800; letter-spacing: .02em; cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease, opacity .2s ease;
+    }
+    .button-primary {
+      background: linear-gradient(180deg, var(--cisco-blue), #2458bb); color: #fff; box-shadow: 0 14px 28px rgba(48,112,231,.24);
+    }
+    .button-primary:hover, .button-primary:focus-visible,
+    .button-secondary:hover, .button-secondary:focus-visible { transform: translateY(-1px); outline: none; }
+    .button-primary:hover, .button-primary:focus-visible { box-shadow: 0 18px 34px rgba(48,112,231,.32); filter: brightness(1.02); }
+    .button-secondary {
+      background: linear-gradient(180deg, var(--cisco-cyber-blue), #1f97e8); color: var(--cisco-dark-blue); box-shadow: 0 14px 28px rgba(0,200,255,.24);
+    }
+    .button-secondary:hover, .button-secondary:focus-visible { box-shadow: 0 18px 34px rgba(0,200,255,.32); filter: brightness(1.02); }
+    .button-secondary[hidden], .button-primary[hidden] { display: none !important; }
+    .button-secondary.copied { background: linear-gradient(180deg, #9bf0ff, #63d4ff); }
+    .prompt-body { position: relative; z-index: 1; padding: 18px 20px 20px; }
+    .prompt-shell { position: relative; padding: 18px; border-radius: 18px; background: rgba(3,14,28,.62); border: 1px solid rgba(255,255,255,.08); overflow: auto; }
+    .prompt-shell pre {
+      margin: 0; color: #e8f1fb; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 13px; line-height: 1.55; white-space: pre-wrap; word-break: break-word; min-height: 240px;
+    }
+    .prompt-shell.placeholder pre { color: rgba(232,241,251,.68); }
+    .prompt-caption { margin-top: 12px; font-size: 13px; color: rgba(255,255,255,.72); }
+    .copy-toast {
+      position: fixed; right: 22px; bottom: 22px; padding: 12px 15px; border-radius: 12px; background: rgba(7,24,45,.94); color: #fff;
+      font-size: 14px; box-shadow: var(--shadow-md); opacity: 0; transform: translateY(8px); pointer-events: none; transition: opacity .2s ease, transform .2s ease; z-index: 1000;
+    }
+    .copy-toast.visible { opacity: 1; transform: translateY(0); }
+    .starting-point-list { margin: 16px 0 0; padding-left: 20px; color: var(--cisco-gray); }
+    .starting-point-list li + li { margin-top: 8px; }
+    .reframe-grid, .exit-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; margin-top: 20px; }
+    .signal-card, .exit-card {
+      position: relative; padding: 18px 18px 18px 20px; border-radius: 18px; background: linear-gradient(180deg, #fff, #f8fbff);
+      border: 1px solid #dce7f4; box-shadow: var(--shadow-sm);
+    }
+    .signal-card::before, .exit-card::before {
+      content: ""; position: absolute; left: 0; top: 18px; bottom: 18px; width: 4px; border-radius: 999px; background: linear-gradient(180deg, var(--cisco-blue), var(--cisco-teal));
+    }
+    .signal-card strong, .exit-card strong { display: block; font-size: 16px; color: var(--cisco-dark-blue); margin-bottom: 6px; }
+    .signal-card p, .exit-card p { margin: 0; color: var(--cisco-gray); }
+    .signal-card.boundary-card { background: linear-gradient(180deg, #fbfcfe, #f3f6fb); border-color: #d7dfeb; }
+    .signal-card.boundary-card::before { background: linear-gradient(180deg, #94a3b8, #cbd5e1); }
+    .signal-list { margin: 8px 0 0; padding-left: 18px; color: var(--cisco-gray); font-size: 14px; line-height: 1.55; }
+    .signal-list li { margin-bottom: 4px; }
+    .signal-list li:last-child { margin-bottom: 0; }
+    .signal-list strong { display: inline; font-size: inherit; color: var(--cisco-dark-blue); margin-bottom: 0; }
+    .solution-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+    .solution-card { position: relative; padding: 20px 20px 18px 22px; border-radius: 20px; background: linear-gradient(180deg, #fff, #f8fbff); border: 1px solid #dce7f4; box-shadow: var(--shadow-sm); }
+    .solution-card::before { content: ""; position: absolute; left: 0; top: 20px; bottom: 20px; width: 4px; border-radius: 999px; background: linear-gradient(180deg, var(--cisco-blue), var(--cisco-teal)); }
+    .solution-card h4 { margin: 0 0 14px; font-size: 22px; line-height: 1.18; color: var(--cisco-dark-blue); letter-spacing: -.02em; }
+    .solution-block + .solution-block { margin-top: 14px; }
+    .solution-label { display: block; margin-bottom: 6px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cisco-blue); }
+    .solution-card p { margin: 0; color: var(--cisco-gray); font-size: 15px; }
+    .solution-list { margin: 0; padding-left: 18px; color: var(--cisco-gray); font-size: 14px; }
+    .solution-list li + li { margin-top: 6px; }
+    .solution-list.nested { margin-top: 10px; padding-left: 18px; }
+    .lead-with { margin-top: 8px; padding: 10px 12px; border-radius: 14px; background: rgba(48,112,231,.08); color: var(--cisco-dark-blue); font-size: 14px; font-style: italic; }
+    .one-cisco-callout { margin-top: 20px; padding: 20px; border-radius: 20px; background: linear-gradient(135deg, rgba(15,23,41,.98), rgba(7,24,45,.96)); color: #fff; box-shadow: var(--shadow-sm); }
+    .one-cisco-callout > strong { display: block; margin-bottom: 8px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.68); }
+    .one-cisco-callout > p { margin: 0 0 14px; color: rgba(255,255,255,.88); }
+    .fit-flow { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+    .fit-step { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); }
+    .fit-step-number { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(180deg, var(--cisco-cyber-blue), #2497e8); color: var(--cisco-dark-blue); font-weight: 800; font-size: 14px; }
+    .fit-step p { margin: 0; color: rgba(255,255,255,.9); font-size: 14px; }
+    .opportunity-input-wrap { margin-top: 20px; }
+    .opportunity-input-card { border-radius: 22px; border: 1px solid #dce7f4; background: linear-gradient(180deg, #fff, #f8fbff); box-shadow: var(--shadow-sm); padding: 20px; }
+    .opportunity-input-card label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--cisco-dark-blue); }
+    .opportunity-input-card textarea, .opportunity-input-card select { width: 100%; min-height: 92px; border: 1px solid #cfe0f4; border-radius: 14px; padding: 13px 14px; font: inherit; color: var(--ink); background: linear-gradient(180deg, #fff, #fbfdff); box-shadow: inset 0 1px 0 rgba(255,255,255,.9); transition: border-color .2s ease, box-shadow .2s ease, background .2s ease; resize: vertical; }
+    .opportunity-input-card select { min-height: 54px; resize: none; appearance: none; }
+    .opportunity-input-card textarea:focus, .opportunity-input-card select:focus { outline: none; border-color: var(--cisco-blue); box-shadow: 0 0 0 4px rgba(48,112,231,.12); background: #fff; }
+    .opportunity-input-card textarea.field-invalid, .opportunity-input-card select.field-invalid { border-color: var(--cisco-orange); box-shadow: 0 0 0 4px rgba(255,144,0,.14); }
+    .inline-error { margin-top: 8px; font-size: 13px; color: #b45309; font-weight: 600; }
+    .question-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+    .question-card {
+      padding: 20px; border-radius: 20px; background: linear-gradient(180deg, #fff, #f8fbff); border: 1px solid #dce7f4; box-shadow: var(--shadow-sm); min-height: 100%;
+    }
+    .question-card.wide { grid-column: 1 / -1; }
+    .question-index {
+      display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; margin-bottom: 12px; background: var(--cisco-dark-blue); color: #fff; font-size: 15px; font-weight: 700;
+    }
+    .question-card h4 { margin: 0 0 14px; font-size: 21px; line-height: 1.3; font-weight: 500; color: var(--cisco-dark-blue); }
+    .surface-tag {
+      display: inline-block; margin-bottom: 8px; padding: 5px 10px; border-radius: 999px; font-size: 11px; text-transform: uppercase; letter-spacing: .11em; font-weight: 700; color: var(--cisco-blue); background: rgba(48,112,231,.08);
+    }
+    .question-card p { margin: 0; font-size: 15px; color: var(--cisco-gray); }
+    .qualification-banner { margin-top: 18px; padding: 16px 18px; border-radius: 18px; background: linear-gradient(135deg, var(--cisco-dark-blue), var(--cisco-navy)); color: #fff; font-size: 16px; box-shadow: var(--shadow-sm); }
+    .length-toggle { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 12px; }
+    .length-toggle label {
+      display: block; margin: 0; padding: 14px 14px 13px; border-radius: 16px; border: 1px solid #cfe0f4;
+      background: linear-gradient(180deg, #fff, #fbfdff); box-shadow: inset 0 1px 0 rgba(255,255,255,.9); cursor: pointer;
+      transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease, background .2s ease;
+    }
+    .length-toggle label:hover { transform: translateY(-1px); }
+    .length-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+    .length-toggle strong { display: block; font-size: 15px; color: var(--cisco-dark-blue); margin-bottom: 4px; }
+    .length-toggle span { display: block; font-size: 13px; color: var(--cisco-gray); line-height: 1.45; }
+    .length-toggle input:checked + strong { color: var(--cisco-blue); }
+    .length-toggle label:has(input:checked) { border-color: var(--cisco-blue); box-shadow: 0 0 0 4px rgba(48,112,231,.12); background: #fff; }
+    .footer-card { display: flex; justify-content: space-between; gap: 18px; align-items: center; margin-top: 26px; padding: 18px 22px; border-radius: 18px; color: var(--cisco-gray); font-size: 14px; }
+    .footer-card strong { color: var(--cisco-dark-blue); }
+    .screen-only { display: block; }
+    @media (max-width: 1240px) {
+      .layout { display: block; }
+      .sidebar { width: auto; min-width: 0; height: auto; padding: 22px 22px 18px; border-bottom: 1px solid rgba(255,255,255,.08); }
+      .nav-list { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .content { padding-top: 22px; }
+      .hero-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 960px) {
+      .content, .sidebar { padding-left: 16px; padding-right: 16px; }
+      .hero, .section-card { padding: 24px 20px; }
+      .nav-list, .question-grid, .reframe-grid, .solution-grid, .exit-grid, .form-grid { grid-template-columns: 1fr; }
+      .form-row.span-2, .question-card.wide { grid-column: auto; }
+      .section-header { grid-template-columns: 1fr; }
+      .section-number { width: 46px; height: 46px; font-size: 20px; }
+      .step-card-header, .prompt-toolbar { display: block; }
+      .prompt-actions { margin-top: 14px; justify-content: stretch; }
+      .button-primary, .button-secondary { width: 100%; }
+    }
+    @media print {
+      @page { size: letter portrait; margin: 0.45in; }
+      html, body { background: #fff !important; }
+      body { color: #000; font-size: 10.5pt; line-height: 1.35; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .layout { display: block; }
+      .sidebar { position: static; width: auto; min-width: 0; height: auto; margin-bottom: 12px; padding: 14px 16px; box-shadow: none; overflow: visible; }
+      .nav-block, .sidebar-note, .screen-only, .copy-toast, .prompt-card { display: none !important; }
+      .content { padding: 0; }
+      .hero, .section-card, .footer-card, .question-card, .signal-card, .exit-card, .step-card { box-shadow: none !important; backdrop-filter: none !important; }
+      .hero, .section-card, .footer-card, .step-card { background: #fff !important; border-color: #d7dfeb !important; }
+      .hero { padding: 16px 18px; margin-bottom: 10px; }
+      .hero::before, .eyebrow::before { display: none; }
+      .hero h2, .section-title-wrap h3 { color: #000 !important; }
+      .hero-grid, .question-grid, .reframe-grid, .exit-grid, .form-grid, .step-stack { display: block; }
+      .hero-panel, .plain-language-callout, .translation-callout, .qualification-banner, .warning-callout, .reframe-callout, .persona-rule, .unit-progress { margin-top: 10px; }
+      .section-card, .step-card { margin-bottom: 10px; padding: 16px 18px; page-break-inside: avoid; }
+      .step-card-header, .step-card-body { padding: 0; }
+      .question-card, .signal-card, .exit-card, .form-row { margin-bottom: 9px; page-break-inside: avoid; }
+      .form-row input, .form-row textarea {
+        border: none !important; border-bottom: 1px solid #8ea1bb !important; border-radius: 0 !important; padding: 6px 0 2px !important; min-height: 20px !important; background: transparent !important; box-shadow: none !important;
+      }
+      .form-row textarea { min-height: 44px !important; }
+      .form-row input::placeholder, .form-row textarea::placeholder, .helper-text { color: transparent !important; }
+      .footer-card { margin-top: 10px; padding: 12px 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Section navigation">
+      <div class="brand-tag">Cisco workshop framework</div>
+      <h1>CC/CX Opportunity Identification Framework</h1>
+      <p class="audience">Generalist Sales Engineers · little to no prior contact center or collaboration expertise required</p>
+      <p class="purpose">Use this reading-first guide to spot, qualify, and shape Contact Center / Customer Experience opportunities inside accounts that do not initially look like CC accounts.</p>
+      <p class="meta">Version 1.2 · 2026-05-07</p>
+      <div class="nav-block">
+        <p class="nav-label">Framework sections</p>
+        <nav class="nav-list">
+          <a class="nav-link" href="#introduction"><span>Intro</span>About this workshop</a>
+          <a class="nav-link active" href="#start-here"><span>00</span>Start here — Customer + AI pre-brief</a>
+          <a class="nav-link" href="#solution-match"><span>01</span>Match Cisco solutions</a>
+          <a class="nav-link" href="#discovery-scan"><span>02</span>5-Question Discovery Scan</a>
+          <a class="nav-link" href="#personas"><span>03</span>Draft the Intro Email</a>
+          <a class="nav-link" href="#checklist"><span>04</span>Draft the Proposal</a>
+          <a class="nav-link" href="#exit-criteria"><span>05</span>Workshop Exit Criteria</a>
+        </nav>
+      </div>
+      <div class="sidebar-note screen-only">Start with Section 0, capture what you know, generate a customer-specific AI pre-brief, then use the rest of the guide to validate and sharpen the opportunity.</div>
+    </aside>
+
+    <main class="content">
+      <header class="hero">
+        <div class="hero-inner">
+          <div class="eyebrow">Cisco customer experience motion</div>
+          <h2>Generalist SEs do not need to be CC experts to recognize a real CC/CX opportunity.</h2>
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <p>This version is explicitly built for Cisco SEs who may have little to no prior contact center or collaboration expertise. The goal is simple: recognize the opportunity, speak plain language, and pull in the right Cisco specialists at the right moment.</p>
+              <div class="hero-chips">
+                <div class="chip">Built for generalist SEs</div>
+                <div class="chip">Dynamic AI prompt generation</div>
+                <div class="chip">Typeable customer capture form</div>
+                <div class="chip">Print-friendly handout</div>
+              </div>
+            </div>
+            <div class="hero-panel">
+              <strong>Workshop purpose</strong>
+              <p>Help SEs identify opportunities, find the right business stakeholders, and shape a buyable Cisco proposal pattern grounded in outcomes rather than product-first positioning.</p>
+            </div>
+          </div>
+          <div class="plain-language-callout">
+            <strong>Plain-language framing</strong>
+            This guide uses some industry terms (CCaaS, IVR, omnichannel, AHT, NPS, deflection, Webex AI). Each is defined the first time it appears. You do <strong>not</strong> need to be a CC specialist to use this. Your job is to <strong>recognize</strong> an opportunity and pull the right Cisco people in — not to become the technical expert.
+          </div>
+        </div>
+      </header>
+
+      <section id="introduction" class="section-card">
+        <div class="section-title-wrap">
+          <h3>About this workshop</h3>
+          <p>This is a 1-hour module inside a half-day Cisco workshop, built for generalist Sales Engineers and designed to move one real account from cold context to concrete, reusable account artifacts.</p>
+        </div>
+        <div class="solution-grid">
+          <article class="signal-card">
+            <strong>What it is</strong>
+            <ul class="signal-list">
+              <li>A 1-hour module within a half-day Cisco workshop for <strong>generalist</strong> Sales Engineers.</li>
+              <li>No prior CC/CX or collaboration expertise is required — the flow is intentionally plain-language and guided.</li>
+              <li>An AI-assisted path that takes the SE from a cold customer name to four ready-to-use artifacts: a pre-brief, a chosen opportunity with use case, a tailored intro email + 5 discovery questions, and a customer-facing proposal.</li>
+              <li>Built around a single chat thread in <strong><a href="https://circuit.cisco.com" target="_blank" rel="noopener">Cisco CIRCUIT</a></strong>, so each generated prompt builds on the same accumulated customer context.</li>
+            </ul>
+          </article>
+          <article class="signal-card">
+            <strong>What it does</strong>
+            <ul class="signal-list">
+              <li>Teaches SEs how to identify CC/CX opportunities in any account — including <strong>internal</strong> contact centers like IT help desk, HR shared services, and employee support.</li>
+              <li>Translates the Cisco CC/CX portfolio into plain language a generalist SE can use: Webex Contact Center, Webex AI Agent, Webex AI Agent Assist, Webex Connect, and Webex Calling.</li>
+              <li>Produces concrete, account-specific artifacts in the session instead of abstract framework outputs.</li>
+              <li>Equips the SE to open a credible conversation with a named persona, then take the resulting proposal back to the AM and the CC/AI specialist for refinement.</li>
+            </ul>
+          </article>
+          <article class="signal-card boundary-card">
+            <strong>What it is not</strong>
+            <ul class="signal-list">
+              <li>Not a deep-dive into Webex Contact Center features, CCaaS architecture, or implementation detail — that remains the specialist's job.</li>
+              <li>Not a replacement for the CC/AI specialist team — it is the qualification and door-opening motion that happens <strong>before</strong> specialist engagement.</li>
+              <li>Not a one-size-fits-all script — every artifact is tailored to the specific customer, opportunity, and persona being pursued.</li>
+              <li>Not a substitute for human judgment — the AI creates strong starting drafts, but the SE and account team still validate, correct, and refine before anything goes to the customer.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="start-here" class="section-card">
+        <div class="section-header">
+          <div class="section-number">0</div>
+          <div class="section-title-wrap">
+            <h3>Start here — tell us about your customer, then let AI do the homework</h3>
+            <p>Before you work through the rest of this guide, spend five minutes giving an AI assistant some context about your customer so it can pre-load you with what is worth pursuing.</p>
+          </div>
+        </div>
+        <div class="step-stack">
+          <article class="step-card">
+            <div class="step-card-header"><div><div class="step-kicker">Step 0a</div><h4>Capture what you know about the customer</h4></div></div>
+            <div class="step-card-body">
+              <p>Fill in as much as you can. Do not worry about gaps — even just the customer name is enough to get value. These fields are typeable on screen and printable for handwritten notes.</p>
+              <div class="form-grid">
+                <div class="form-row"><label for="customer-name">Customer name</label><input id="customer-name" type="text" placeholder="Enter customer name"></div>
+                <div class="form-row"><label for="industry">Industry / vertical</label><input id="industry" type="text" placeholder="Insurance, retail, healthcare, manufacturing..."></div>
+                <div class="form-row"><label for="hq-regions">HQ location and major regions of operation</label><input id="hq-regions" type="text" placeholder="HQ city + key operating regions"></div>
+                <div class="form-row"><label for="subsidiaries">Subsidiaries, brands, business units</label><input id="subsidiaries" type="text" placeholder="List anything relevant you know"></div>
+                <div class="form-row span-2"><label for="locations">Specific locations relevant to your account</label><textarea id="locations" placeholder="Offices, branches, plants, contact centers, retail locations, dealer networks..."></textarea></div>
+                <div class="form-row span-2"><label for="cisco-footprint">Existing Cisco footprint</label><textarea id="cisco-footprint" class="short" placeholder="Collaboration, networking, security, anything you know"></textarea></div>
+                <div class="form-row span-2">
+                  <label for="external-channels">External-facing channels</label>
+                  <textarea id="external-channels" placeholder="Call center, mobile app, web chat, branches, field techs, agents/dealers/brokers..."></textarea>
+                </div>
+                <div class="form-row span-2">
+                  <label for="internal-orgs">Internal-facing service organizations</label>
+                  <div class="helper-text">Many large companies run internal contact centers that are bigger than their external ones — these are real opportunities.</div>
+                  <textarea id="internal-orgs" placeholder="IT help desk, HR service center, employee support, finance/payroll desk, facilities..."></textarea>
+                </div>
+                <div class="form-row span-2">
+                  <label for="focus-area">Specific focus area you want to pursue (optional)</label>
+                  <div class="helper-text">Leave blank for an open-ended scan. If you specify a focus, the AI will weight its recommendations toward this area while still surfacing other strong opportunities.</div>
+                  <textarea id="focus-area" class="short" placeholder="e.g. internal IT help desk in EMEA, AI self-service for member services line, dealer support"></textarea>
+                </div>
+                <div class="form-row span-2"><label for="pain-news">Any current pain, news, or initiative you are aware of</label><textarea id="pain-news" placeholder="Vendor change, M&amp;A, AI mandate, layoffs, regulatory pressure, customer-experience push..."></textarea></div>
+              </div>
+              <div class="form-note">Tip: partial information is fine. The AI will research size and scale; your job is to give it the context it cannot infer as easily.</div>
+            </div>
+          </article>
+
+          <article class="prompt-card screen-only" id="promptCard">
+            <div class="prompt-toolbar">
+              <div class="prompt-meta">
+                <strong>Step 0b</strong>
+                <p>Generate your AI pre-brief from the form above, then copy the customer-specific prompt into <strong><a href="https://circuit.cisco.com" target="_blank" rel="noopener">Cisco CIRCUIT</a></strong> — Cisco's internal, sanctioned AI chat and the recommended choice for anything involving customer or account context. You can also use ChatGPT, Claude, Copilot, or Gemini if that fits your workflow.</p>
+              </div>
+              <div class="prompt-actions">
+                <button class="button-primary" id="generatePromptButton" type="button">Generate prompt</button>
+                <button class="button-secondary" id="regeneratePromptButton" type="button" hidden>Regenerate</button>
+                <button class="button-secondary" id="copyPromptButton" type="button" hidden>Copy prompt</button>
+              </div>
+            </div>
+            <div class="prompt-body">
+              <div class="prompt-shell placeholder" id="promptShell"><pre id="generatedPrompt">Fill in Step 0a, then click Generate prompt below.</pre></div>
+              <div class="prompt-caption">The generated prompt uses your actual values — not generic placeholders. Update the form anytime, then click Regenerate.</div>
+            </div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-card-header"><div><div class="step-kicker">Step 0c</div><h4>Use the output as your starting point</h4></div></div>
+            <div class="step-card-body">
+              <p>Take the AI's ranked opportunity list into the rest of this guide. As you walk through the discovery scan, outreach, and proposal-building flow below, use the AI output to:</p>
+              <ul class="starting-point-list">
+                <li>Pick <strong>one opportunity</strong> to focus on for this exercise.</li>
+                <li>Identify <strong>one persona</strong> to target for an introduction.</li>
+                <li>Draft <strong>one discovery conversation</strong> you would actually try.</li>
+              </ul>
+              <div class="warning-callout"><strong>Warning</strong>⚠️ The AI output is a <em>starting hypothesis</em>, not the truth. Treat it as a research head-start. You and your account team validate and correct it.</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="solution-match" class="section-card">
+        <div class="section-header">
+          <div class="section-number">1</div>
+          <div class="section-title-wrap">
+            <h3>Match Cisco solutions to the opportunity</h3>
+            <p>Now that you have a ranked list of opportunities from your AI pre-brief, the next move is to map the right Cisco capability to the opportunity you want to pursue.</p>
+          </div>
+        </div>
+        <div class="translation-callout"><strong>Translation up-front</strong>When we say <em>contact center</em> (CC) or <em>customer experience</em> (CX), we mean <strong>anywhere a customer interacts with the business</strong> — phone calls, web chat, mobile app messages, in-branch visits, field technicians, dealer/broker/agent networks, even back-office service teams. It is not just the room with headsets and dashboards. And remember: <strong>internal</strong> service organizations (IT help desk, HR shared services, employee support) count too — often bigger than the external ones.</div>
+        <p class="lead">You do not need to be the technical expert — you just need to recognize which Cisco capability fits where, and pull in the right specialist when it is time to go deeper.</p>
+        <div class="reframe-grid">
+          <article class="signal-card">
+            <strong>Signals to watch for</strong>
+            <ul class="signal-list">
+              <li>CCaaS / UCaaS renewal coming up, or a failing IVR that people complain about.</li>
+              <li>C-suite AI mandate, agent attrition, or productivity pressure.</li>
+              <li>Voice, chat, and digital channels are fragmented across siloed teams or vendors.</li>
+              <li>M&amp;A consolidation or a new WhatsApp / RCS / digital-service push.</li>
+            </ul>
+          </article>
+          <article class="signal-card">
+            <strong>Buying windows</strong>
+            <ul class="signal-list">
+              <li>Incumbent contract renewal or fiscal-year planning cycle.</li>
+              <li>Post-M&amp;A platform consolidation or operating-model redesign.</li>
+              <li>Regulatory deadline around call recording, privacy, or service controls.</li>
+              <li>Service incident, executive attention, or AI-transformation budget release.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="reframe-grid">
+          <article class="signal-card">
+            <strong>External examples</strong>
+            <ul class="signal-list">
+              <li>Retail customer service and order-support operations.</li>
+              <li>Insurance claims, policy servicing, and banking call-center journeys.</li>
+              <li>Telco or utilities support where service quality and deflection matter.</li>
+            </ul>
+          </article>
+          <article class="signal-card">
+            <strong>Internal examples</strong>
+            <ul class="signal-list">
+              <li>IT help desk / end-user services for employees.</li>
+              <li>HR shared services, employee benefits, or payroll support.</li>
+              <li>Internal facilities, field-service, or employee support desks.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="warning-callout"><strong>What to ignore (for now)</strong>Park it, not a CC/CX deal: pure calling refresh with no service angle, isolated agent tools with no platform motion, or a one-off chatbot with no enterprise scope.</div>
+        <div class="solution-grid">
+          <article class="solution-card">
+            <h4>Webex Contact Center</h4>
+            <div class="solution-block">
+              <span class="solution-label">What it is in plain terms</span>
+              <p>The cloud-delivered system that runs the customer’s contact center — handles inbound calls, routes them to the right agent or queue, integrates with CRM systems, gives supervisors dashboards, and reports on what happened. It replaces or modernizes whatever they are using today.</p>
+            </div>
+            <div class="solution-block">
+              <span class="solution-label">Examples of where it fits</span>
+              <ul class="solution-list">
+                <li>Move off an aging on-prem contact center.</li>
+                <li>Consolidate multiple regional CC vendors.</li>
+                <li>Stand up a real internal help desk platform instead of a phone tree.</li>
+                <li>Compete into a CCaaS renewal or platform refresh.</li>
+              </ul>
+            </div>
+            <div class="solution-block">
+              <span class="solution-label">When to lead with it</span>
+              <div class="lead-with">Lead with Webex Contact Center anywhere there is a real contact center buying decision in the next 12–18 months: vendor renewal, M&amp;A consolidation, or platform refresh.</div>
+            </div>
+          </article>
+          <article class="solution-card">
+            <h4>Webex AI</h4>
+            <div class="solution-block">
+              <span class="solution-label">What it is in plain terms</span>
+              <p>Cisco’s AI portfolio for the contact center. It helps customers automate simple work, support agents in real time, and coach the operation using AI-driven insights.</p>
+              <ul class="solution-list nested">
+                <li><strong>AI Agent</strong> — AI handles the conversation directly for voice or chat self-service.</li>
+                <li><strong>AI Agent Assist</strong> — AI sits next to the human agent, suggesting answers and summarizing calls.</li>
+                <li><strong>AI-powered analytics &amp; coaching</strong> — AI scores interactions, surfaces themes, and identifies coaching moments.</li>
+              </ul>
+            </div>
+            <div class="solution-block">
+              <span class="solution-label">Examples of where it fits</span>
+              <ul class="solution-list">
+                <li>Deflection pressure: too many calls, not enough agents.</li>
+                <li>High agent attrition and slow ramp for new hires.</li>
+                <li>Need to extend service hours without adding headcount.</li>
+                <li>Executive AI mandate with no clear starting point.</li>
+              </ul>
+            </div>
+            <div class="solution-block">
+              <span class="solution-label">When to lead with it</span>
+              <div class="lead-with">Lead with Webex AI when the customer says “AI” first, or when deflection, AHT, agent productivity, or first-call resolution is explicitly in scope.</div>
+            </div>
+          </article>
+          <article class="solution-card">
+            <h4>Webex Connect</h4>
+            <div class="solution-block">
+              <span class="solution-label">What it is in plain terms</span>
+              <p>The platform that lets the customer engage on digital channels — SMS, WhatsApp, RCS, email, push, web chat, mobile in-app — and orchestrate journeys across them. It supports proactive outbound and digital-to-human escalation without bolting together point tools.</p>
+            </div>
+            <div class="solution-block">
+              <span class="solution-label">Examples of where it fits</span>
+              <ul class="solution-list">
+                <li>Launch WhatsApp, SMS, or RCS for service.</li>
+                <li>Consolidate multiple vendors for SMS, chat, and email.</li>
+                <li>Run proactive reminders, alerts, and updates.</li>
+                <li>Deflect from voice into digital journeys.</li>
+              </ul>
+            </div>
+            <div class="solution-block">
+              <span class="solution-label">When to lead with it</span>
+              <div class="lead-with">Lead with Webex Connect when the conversation is about digital channels, omnichannel journeys, or proactive customer communication rather than just inbound voice.</div>
+            </div>
+          </article>
+        </div>
+        <div class="one-cisco-callout">
+          <strong>The One Cisco story</strong>
+          <p>These three are designed to work together as one platform. A typical mature deployment looks like this:</p>
+          <ol class="fit-flow">
+            <li class="fit-step"><div class="fit-step-number">1</div><p>A customer calls in and <strong>Webex Contact Center</strong> routes the interaction to the right queue, workflow, or agent.</p></li>
+            <li class="fit-step"><div class="fit-step-number">2</div><p><strong>Webex AI Agent</strong> handles 30–50% of intents end-to-end when the request is simple enough for self-service.</p></li>
+            <li class="fit-step"><div class="fit-step-number">3</div><p>For everything else, a human agent takes over and <strong>Webex AI Agent Assist</strong> supports that agent in real time.</p></li>
+            <li class="fit-step"><div class="fit-step-number">4</div><p><strong>Webex Connect</strong> runs the digital side — SMS reminders, WhatsApp service, proactive outbound — and can escalate digital interactions back into Webex Contact Center when needed.</p></li>
+            <li class="fit-step"><div class="fit-step-number">5</div><p>All of it produces unified data the customer can act on, which is the real value of the integrated Cisco story.</p></li>
+          </ol>
+        </div>
+        <div class="opportunity-input-wrap screen-only">
+          <div class="step-card">
+            <div class="step-card-header"><div><div class="step-kicker">Section 1 prompt</div><h4>Match Cisco to my opportunity</h4></div></div>
+            <div class="step-card-body">
+              <p>Pick one opportunity from your AI pre-brief output (Step 0b) — the one you want to actually develop with this customer. The page will build a follow-up prompt you can paste into the <strong>same AI chat thread</strong>.</p>
+              <div class="opportunity-input-card">
+                <label for="opportunity-input">Which opportunity do you want to pursue?</label>
+                <div class="helper-text">Pick one from your AI pre-brief output (Step 0b) — the opportunity you want to actually develop with this customer. Type or paste the opportunity name and any quick context.</div>
+                <textarea id="opportunity-input" placeholder="e.g. AI self-service for member services to deflect 30% of password-reset and balance-check calls"></textarea>
+                <div class="inline-error" id="opportunity-error" hidden>Enter the opportunity you want to pursue first.</div>
+              </div>
+            </div>
+          </div>
+          <article class="prompt-card" id="matchPromptCard">
+            <div class="prompt-toolbar">
+              <div class="prompt-meta">
+                <strong>Generated continuation prompt</strong>
+                <p>Use this to continue the same AI conversation from Step 0b and turn a ranked opportunity into a one-page executive-summary use case draft.</p>
+              </div>
+              <div class="prompt-actions">
+                <button class="button-primary" id="generateMatchPromptButton" type="button">Generate matching prompt</button>
+                <button class="button-secondary" id="regenerateMatchPromptButton" type="button" hidden>Regenerate</button>
+                <button class="button-secondary" id="copyMatchPromptButton" type="button" hidden>Copy prompt</button>
+              </div>
+            </div>
+            <div class="prompt-body">
+              <div class="prompt-shell placeholder" id="matchingPromptShell"><pre id="matchingPrompt">Paste or type the opportunity above, then click Generate matching prompt.</pre></div>
+              <div class="prompt-caption">This continuation prompt reuses your Step 0 customer context and asks the AI for an executive-summary output: opportunity frame, top 3 use cases, next step, and risks & verification.</div>
+            </div>
+          </article>
+          <div class="warning-callout"><strong>Warning</strong>⚠️ Same rule as Step 0b — the AI output is a strong starting point, not the truth. You and your account team validate, correct, and refine it. Bring in your CC/AI specialist when you are ready to go deeper.</div>
+        </div>
+      </section>
+
+      <section id="discovery-scan" class="section-card">
+        <div class="section-header">
+          <div class="section-number">2</div>
+          <div class="section-title-wrap">
+            <h3>The 5-Question Discovery Scan</h3>
+            <p>Use these in any meeting — even if the meeting is not framed as a CC discussion. They are short, plain-language, and designed for non-specialists.</p>
+          </div>
+        </div>
+        <div class="plain-language-callout"><strong>When to use which</strong>Use the static 5 questions in your <strong>first</strong> conversation when you know little about the account. Use the persona-tailored generator below once you know who you are meeting and already have customer context loaded into the same CIRCUIT thread. The static questions surface the opportunity; the tailored questions advance it.</div>
+        <div class="question-grid">
+          <article class="question-card"><div class="question-index">1</div><h4>“Where in your business do people — customers OR employees — go when they need help?”</h4><div class="surface-tag">What it surfaces</div><p>Every service path the organization runs, including external customer journeys and internal support motions that IT may not fully own.</p></article>
+          <article class="question-card"><div class="question-index">2</div><h4>“What does the experience look like today across those channels — for customers AND for employees who need internal support?”</h4><div class="surface-tag">What it surfaces</div><p>Fragmentation, channel silos, and inconsistency across voice, chat, digital, in-person, and internal-service touchpoints. Cisco’s omnichannel story lands here.</p></article>
+          <article class="question-card"><div class="question-index">3</div><h4>“What are you measuring — and what are you being asked to improve this year?”</h4><div class="surface-tag">What it surfaces</div><p>The business outcome: retention, deflection, AHT, NPS, cost-to-serve, or internal-support efficiency. This is the proposal anchor, not a feature list.</p></article>
+          <article class="question-card"><div class="question-index">4</div><h4>“Where are you using — or thinking about using — AI to help customers OR employees get answers faster?”</h4><div class="surface-tag">What it surfaces</div><p>Opportunities for AI self-service and AI agent support in both customer-facing and internal-service environments. This maps directly to Webex AI.</p></article>
+          <article class="question-card wide"><div class="question-index">5</div><h4>“What’s getting in the way today — vendor, platform, integration, cost, agent experience?”</h4><div class="surface-tag">What it surfaces</div><p>The wedge: CCaaS / UCaaS renewal, a failing IVR, an internal help-desk platform gap, a Salesforce or system-of-record problem, or unsustainable per-agent / per-channel cost pressure.</p></article>
+        </div>
+        <div class="reframe-grid">
+          <article class="signal-card">
+            <strong>How to read answers — strong signal</strong>
+            <ul class="signal-list">
+              <li>The customer names a specific business or service problem.</li>
+              <li>They mention a metric, target, or measurable pain.</li>
+              <li>They reference vendor/platform pain or ask what Cisco would do.</li>
+            </ul>
+          </article>
+          <article class="signal-card">
+            <strong>How to read answers — weak or non-answer</strong>
+            <ul class="signal-list">
+              <li><strong>Weak:</strong> “we're looking at options,” “everything is fine,” or no metrics show up.</li>
+              <li><strong>Non-answer:</strong> they deflect to IT, procurement, or say they have no view.</li>
+              <li>That is usually a persona-targeting problem, not a qualification failure.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="qualification-banner"><strong>What to do with a non-answer:</strong> if your contact cannot answer 3 of the 5, you are probably talking to the wrong person. Use the persona generator below to identify who you <em>should</em> be meeting and ask the AM for that intro.</div>
+        <div class="opportunity-input-wrap screen-only">
+          <p class="lead" style="margin-top: 22px; margin-bottom: 14px;">Want these tailored to a specific persona before the meeting? Pick a title and generate a customized version of the 5 questions.</p>
+          <div class="step-card">
+            <div class="step-card-header"><div><div class="step-kicker">Section 2 prompt</div><h4>Tailor the discovery scan to a persona</h4></div></div>
+            <div class="step-card-body">
+              <div class="opportunity-input-card">
+                <label for="persona-select">Which persona / title are you meeting?</label>
+                <div class="helper-text">Choose one of the common buyer / stakeholder titles below to generate five discovery questions tuned to that persona’s priorities.</div>
+                <select id="persona-select">
+                  <option value="" disabled selected>Select a persona / title…</option>
+                  <optgroup label="Business / service owners (start here)">
+                    <option>Head of Contact Center / Director of Customer Service</option>
+                    <option>VP / Director of Customer Operations / Customer Care</option>
+                    <option>Head of Customer Experience / Director of Customer Operations</option>
+                    <option>Director / Head of IT Service Desk / End User Services / Employee Experience</option>
+                    <option>Head of Shared Services / Employee Services / HR Operations</option>
+                    <option>Head of Branch / Store / Field Operations</option>
+                  </optgroup>
+                  <optgroup label="Digital / product owners">
+                    <option>Head of Digital Experience / Customer Experience Technology</option>
+                    <option>Product Owner / Application Owner for Contact Center or Customer Portal</option>
+                  </optgroup>
+                  <optgroup label="IT / platform owners">
+                    <option>Chief Information Officer (CIO)</option>
+                    <option>Chief Technology Officer (CTO)</option>
+                    <option>VP / Director of IT / IT Operations</option>
+                    <option>VP / Director of Collaboration / Unified Communications</option>
+                    <option>VP / Director of Voice / Telephony / Enterprise Communications</option>
+                    <option>VP / Director of Infrastructure / Cloud Infrastructure</option>
+                  </optgroup>
+                  <optgroup label="Architects / technical evaluators">
+                    <option>Enterprise Architect (EA)</option>
+                    <option>Cloud Architect / Hybrid Cloud Architect</option>
+                    <option>Collaboration / UC Architect</option>
+                    <option>Contact Center Architect / Customer Experience Architect</option>
+                  </optgroup>
+                  <optgroup label="Evaluators / blockers (later in cycle)">
+                    <option>Chief Information Security Officer (CISO)</option>
+                    <option>IT Risk Manager / Information Risk Manager</option>
+                    <option>Compliance Manager (call recording, data privacy, customer interactions)</option>
+                    <option>Network Architect / Principal Network Architect</option>
+                    <option>Network Engineering Manager / Network Operations Manager (NOC Manager)</option>
+                    <option>VP / Director of Networking / Network Services</option>
+                  </optgroup>
+                </select>
+                <div class="inline-error" id="persona-error" hidden>Select a persona / title first.</div>
+              </div>
+            </div>
+          </div>
+          <article class="prompt-card">
+            <div class="prompt-toolbar">
+              <div class="prompt-meta">
+                <strong>Generated discovery-question prompt</strong>
+                <p>Paste this into the SAME chat thread you started in Step 0b — the AI already has the customer context AND the use cases from Section 1. You'll get five questions anchored to the specific opportunity you chose to pursue, tailored to this persona at this customer.</p>
+              </div>
+              <div class="prompt-actions">
+                <button class="button-primary" id="generatePersonaPromptButton" type="button">Generate tailored prompt</button>
+                <button class="button-secondary" id="regeneratePersonaPromptButton" type="button" hidden>Regenerate</button>
+                <button class="button-secondary" id="copyPersonaPromptButton" type="button" hidden>Copy prompt</button>
+              </div>
+            </div>
+            <div class="prompt-body">
+              <div class="prompt-shell placeholder" id="personaPromptShell"><pre id="personaPrompt">Select a persona / title above, then click Generate tailored prompt.</pre></div>
+              <div class="prompt-caption">This prompt is customer- and opportunity-specific. It reuses the same chat thread context from the pre-brief and Section 1 use case so the questions are tailored to this stakeholder at this customer for this exact motion.</div>
+            </div>
+          </article>
+        </div>
+        <div class="step-stack">
+          <article class="step-card">
+            <div class="step-card-header"><div><div class="step-kicker">Advance / Hold / Park</div><h4>Qualification gate + specialist routing</h4></div></div>
+            <div class="step-card-body">
+              <div class="exit-grid" style="margin-top: 0;">
+                <article class="exit-card"><strong>Problem</strong><p>Named service problem with at least one metric or business outcome.</p></article>
+                <article class="exit-card"><strong>Person</strong><p>Known owner — or at minimum a specific target persona to engage first.</p></article>
+                <article class="exit-card"><strong>Trigger</strong><p>A credible why-now: renewal, AI mandate, fragmentation, cost pressure, service issue, consolidation, or regulatory deadline.</p></article>
+                <article class="exit-card"><strong>Path</strong><p>A plausible Cisco capability mapping and a clear specialist to bring in next.</p></article>
+              </div>
+              <div class="reframe-grid">
+                <article class="signal-card"><strong>All 4 ✓ → ADVANCE</strong><p>Generate the proposal in Section 4 and bring in the specialist now.</p></article>
+                <article class="signal-card"><strong>2-3 ✓ → HOLD</strong><p>Stay in discovery. The proposal can exist, but it is internal-only — not customer-ready.</p></article>
+              </div>
+              <div class="warning-callout"><strong>0-1 ✓ → PARK</strong>Not a CC/CX opportunity yet. Move on, or come back when a real trigger appears.</div>
+              <div class="opportunity-input-card" style="margin-top: 18px;">
+                <label style="margin-bottom: 10px;">Specialist routing</label>
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Signal</th><th>Engage</th></tr></thead>
+                    <tbody>
+                      <tr><td>CC platform, routing, supervisor experience, CCaaS renewal, migration</td><td><strong>Webex Contact Center specialist</strong></td></tr>
+                      <tr><td>AI Agent self-service, AI Agent Assist, conversation analytics, coaching</td><td><strong>Webex AI specialist</strong></td></tr>
+                      <tr><td>SMS / WhatsApp / RCS, proactive outbound, journey orchestration, digital deflection</td><td><strong>Webex Connect specialist</strong></td></tr>
+                      <tr><td>Telephony, calling architecture, PSTN, calling-adjacent consolidation</td><td><strong>Webex Calling / Collaboration specialist</strong></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="unit-progress"><strong>Handoff packet:</strong> chosen opportunity, target persona + status, discovery evidence, unverified assumptions, expected outcome / metric, specialist type requested, and the requested next step (joint discovery, demo, or scoping call).</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="personas" class="section-card">
+        <div class="section-header">
+          <div class="section-number">3</div>
+          <div class="section-title-wrap">
+            <h3>Draft the introductory email</h3>
+            <p>Now that you have the Step 0b customer context, the chosen opportunity from Section 1, and the Section 2 discovery angle, use this to generate a tailored intro email that opens the door with the right persona.</p>
+          </div>
+        </div>
+        <div class="opportunity-input-wrap screen-only">
+          <div class="step-card">
+            <div class="step-card-header"><div><div class="step-kicker">Section 3 prompt</div><h4>Generate a tailored outreach email</h4></div></div>
+            <div class="step-card-body">
+              <p>Choose the recipient title, the tone you want to strike, and the outreach length. The page will build a continuation prompt that tells the AI to draft a first-touch email using the customer and opportunity context already loaded in the same thread.</p>
+              <div class="form-grid" style="margin-top: 18px;">
+                <div class="form-row">
+                  <div class="opportunity-input-card">
+                    <label for="email-title-select">Recipient title</label>
+                    <div class="helper-text">Use the same stakeholder-title list from Section 2 so the outreach is matched to the persona you want to engage.</div>
+                    <select id="email-title-select">
+                      <option value="" disabled selected>Select recipient title…</option>
+                      <optgroup label="Business / service owners (start here)">
+                        <option>Head of Contact Center / Director of Customer Service</option>
+                        <option>VP / Director of Customer Operations / Customer Care</option>
+                        <option>Head of Customer Experience / Director of Customer Operations</option>
+                        <option>Director / Head of IT Service Desk / End User Services / Employee Experience</option>
+                        <option>Head of Shared Services / Employee Services / HR Operations</option>
+                        <option>Head of Branch / Store / Field Operations</option>
+                      </optgroup>
+                      <optgroup label="Digital / product owners">
+                        <option>Head of Digital Experience / Customer Experience Technology</option>
+                        <option>Product Owner / Application Owner for Contact Center or Customer Portal</option>
+                      </optgroup>
+                      <optgroup label="IT / platform owners">
+                        <option>Chief Information Officer (CIO)</option>
+                        <option>Chief Technology Officer (CTO)</option>
+                        <option>VP / Director of IT / IT Operations</option>
+                        <option>VP / Director of Collaboration / Unified Communications</option>
+                        <option>VP / Director of Voice / Telephony / Enterprise Communications</option>
+                        <option>VP / Director of Infrastructure / Cloud Infrastructure</option>
+                      </optgroup>
+                      <optgroup label="Architects / technical evaluators">
+                        <option>Enterprise Architect (EA)</option>
+                        <option>Cloud Architect / Hybrid Cloud Architect</option>
+                        <option>Collaboration / UC Architect</option>
+                        <option>Contact Center Architect / Customer Experience Architect</option>
+                      </optgroup>
+                      <optgroup label="Evaluators / blockers (later in cycle)">
+                        <option>Chief Information Security Officer (CISO)</option>
+                        <option>IT Risk Manager / Information Risk Manager</option>
+                        <option>Compliance Manager (call recording, data privacy, customer interactions)</option>
+                        <option>Network Architect / Principal Network Architect</option>
+                        <option>Network Engineering Manager / Network Operations Manager (NOC Manager)</option>
+                        <option>VP / Director of Networking / Network Services</option>
+                      </optgroup>
+                    </select>
+                    <div class="inline-error" id="email-title-error" hidden>Select a recipient title first.</div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="opportunity-input-card">
+                    <label for="email-tone-select">Tone</label>
+                    <div class="helper-text">Pick the register the SE wants to use for this first-touch outreach.</div>
+                    <select id="email-tone-select">
+                      <option>Formal &amp; executive</option>
+                      <option selected>Professional &amp; consultative</option>
+                      <option>Conversational &amp; warm</option>
+                      <option>Direct &amp; concise</option>
+                      <option>Peer-to-peer technical</option>
+                    </select>
+                    <div class="inline-error" id="email-tone-error" hidden>Select a tone first.</div>
+                  </div>
+                </div>
+                <div class="form-row span-2">
+                  <div class="opportunity-input-card">
+                    <label>Email length</label>
+                    <div class="helper-text">Choose whether you want a tight outreach note or a more fully framed email with explicit use case context.</div>
+                    <div class="length-toggle" role="radiogroup" aria-label="Email length">
+                      <label>
+                        <input type="radio" name="email-length" value="Brief" checked>
+                        <strong>Brief</strong>
+                        <span>Short outreach email, ~100-150 words, single CTA.</span>
+                      </label>
+                      <label>
+                        <input type="radio" name="email-length" value="Detailed">
+                        <strong>Detailed</strong>
+                        <span>Longer email with framing, use case, Cisco capabilities, and next steps.</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <article class="prompt-card" id="emailPromptCard">
+            <div class="prompt-toolbar">
+              <div class="prompt-meta">
+                <strong>Generated introductory-email prompt</strong>
+                <p>Paste this into the SAME chat thread to have the AI draft a persona-specific email grounded in the customer context, the chosen opportunity, and the discovery angle already established earlier.</p>
+              </div>
+              <div class="prompt-actions">
+                <button class="button-primary" id="generateEmailPromptButton" type="button">Generate email prompt</button>
+                <button class="button-secondary" id="regenerateEmailPromptButton" type="button" hidden>Regenerate</button>
+                <button class="button-secondary" id="copyEmailPromptButton" type="button" hidden>Copy prompt</button>
+              </div>
+            </div>
+            <div class="prompt-body">
+              <div class="prompt-shell placeholder" id="emailPromptShell"><pre id="emailPrompt">Choose the recipient title, tone, and length above, then click Generate email prompt.</pre></div>
+              <div class="prompt-caption">This generator builds an email-drafting prompt only. The AI should reuse the same customer and opportunity thread context you already established in the earlier steps.</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="checklist" class="section-card">
+        <div class="section-header">
+          <div class="section-number">4</div>
+          <div class="section-title-wrap">
+            <h3>Draft the customer proposal</h3>
+            <p>Now that you have the Step 0b customer context, the chosen opportunity from Section 1, the Section 2 discovery angle, and the Section 3 intro email, use this to generate a tailored customer-facing proposal anchored to the same opportunity.</p>
+          </div>
+        </div>
+        <div class="warning-callout"><strong>Before you generate the proposal</strong>Confirm the four qualification checks from Section 2 — <strong>Problem / Person / Trigger / Path</strong>. If you have all 4, the proposal is ready for customer-facing refinement. If you have 2-3, treat the output as internal-only. If you have 0-1, go back to discovery first — the proposal will be hollow.</div>
+        <div class="opportunity-input-wrap screen-only">
+          <div class="step-card">
+            <div class="step-card-header"><div><div class="step-kicker">Section 4 prompt</div><h4>Generate the proposal draft</h4></div></div>
+            <div class="step-card-body">
+              <p>Choose the proposal format, the commercial framing, and whether you want pricing placeholders. The page will build a continuation prompt that asks the AI to draft a customer-facing proposal using the customer, opportunity, and outreach context already established in the same thread.</p>
+              <div class="form-grid" style="margin-top: 18px;">
+                <div class="form-row">
+                  <div class="opportunity-input-card">
+                    <label for="proposal-format-select">Proposal format</label>
+                    <div class="helper-text">Pick the document shape that best matches the buying motion you expect at this customer.</div>
+                    <select id="proposal-format-select">
+                      <option selected>Executive summary (1 page)</option>
+                      <option>Detailed proposal (3-5 pages)</option>
+                      <option>Pilot scoping document</option>
+                      <option>Business case / ROI-focused</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="opportunity-input-card">
+                    <label for="proposal-commercial-select">Commercial framing</label>
+                    <div class="helper-text">Pick the commercial shape that matches how this customer actually buys — buyable per unit, all-in platform, prove-then-expand, or staged rollout.</div>
+                    <select id="proposal-commercial-select">
+                      <option selected>Per-unit / buyable slice (e.g. per-office, per-business-unit)</option>
+                      <option>Single platform deal</option>
+                      <option>Pilot then expand</option>
+                      <option>Phased rollout</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row span-2">
+                  <div class="opportunity-input-card">
+                    <label style="margin-bottom: 10px;">Commercial detail handling</label>
+                    <label style="display: flex; align-items: flex-start; gap: 12px; margin: 0; font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--ink);">
+                      <input id="proposal-pricing-toggle" type="checkbox" checked style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--cisco-blue);">
+                      <span>Include pricing placeholders such as <strong>[$ Implementation cost]</strong>, <strong>[$ Annual recurring]</strong>, and <strong>[$ Pilot cost]</strong> for the SE to fill in later.</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <article class="prompt-card" id="proposalPromptCard">
+            <div class="prompt-toolbar">
+              <div class="prompt-meta">
+                <strong>Generated proposal prompt</strong>
+                <p>Paste this into the SAME chat thread to have the AI draft a customer-facing proposal anchored to the chosen opportunity, with the right commercial shape and document format.</p>
+              </div>
+              <div class="prompt-actions">
+                <button class="button-primary" id="generateProposalPromptButton" type="button">Generate proposal prompt</button>
+                <button class="button-secondary" id="regenerateProposalPromptButton" type="button" hidden>Regenerate</button>
+                <button class="button-secondary" id="copyProposalPromptButton" type="button" hidden>Copy prompt</button>
+              </div>
+            </div>
+            <div class="prompt-body">
+              <div class="prompt-shell placeholder" id="proposalPromptShell"><pre id="proposalPrompt">Choose the proposal format and commercial framing above, then click Generate proposal prompt.</pre></div>
+              <div class="prompt-caption">This prompt asks the AI to produce proposal content only — no commentary — using the same customer and opportunity thread context you already built upstream.</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="exit-criteria" class="section-card">
+        <div class="section-header">
+          <div class="section-number">5</div>
+          <div class="section-title-wrap">
+            <h3>What to leave the workshop with</h3>
+            <p>End the session with five concrete artifacts in your chat thread — not a vague sense that CC is “interesting.” Each artifact builds on the previous one, all anchored to the same customer and opportunity.</p>
+          </div>
+        </div>
+        <div class="exit-grid">
+          <article class="exit-card"><strong>One AI pre-brief</strong><p>A completed Step 0b customer pre-brief with the top 2 opportunities ranked, financial impact ranges, and Cisco TCV estimates. Pasted into your CIRCUIT chat thread.</p></article>
+          <article class="exit-card"><strong>One chosen opportunity + use case</strong><p>The Section 1 use case you decided to pursue, with quantified outcome, Cisco solution mapping, and at least one industry reference. This is your anchor for everything downstream.</p></article>
+          <article class="exit-card"><strong>One persona + intro email + 5 discovery questions</strong><p>A specific stakeholder title chosen, the intro email drafted and ready to personalize and send, and the 5 tailored discovery questions ready for the meeting.</p></article>
+          <article class="exit-card"><strong>One proposal draft</strong><p>A customer-facing proposal anchored to the chosen opportunity, in the format that fits the customer's buying motion. Ready to take to the AM and the CC/AI specialist for refinement.</p></article>
+        </div>
+        <div class="unit-progress"><strong>That is the unit of progress:</strong> one account, one opportunity, four ready-to-use artifacts, one next move.</div>
+      </section>
+
+      <footer class="footer-card">
+        <div><strong>CC/CX Opportunity Identification Framework</strong><br>Prepared for Cisco Sales Engineer workshop use.</div>
+        <div>Version 1.2 · 2026-05-07 · Self-contained HTML for on-screen reading and print handout use.</div>
+      </footer>
+    </main>
+  </div>
+
+  <div class="copy-toast" id="copyToast">Prompt copied to clipboard.</div>
+
+  <script>
+    (function () {
+      const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+      const navTargets = navLinks.map((link) => ({ link, id: (link.getAttribute("href") || "").replace("#", ""), section: document.querySelector(link.getAttribute("href")) }));
+      const sections = navTargets.map((item) => item.section).filter(Boolean);
+      const setActive = (id) => navLinks.forEach((link) => link.classList.toggle("active", link.getAttribute("href") === `#${id}`));
+      const syncActiveFromHash = () => {
+        const hashId = window.location.hash ? window.location.hash.slice(1) : "";
+        if (hashId && sections.some((section) => section.id === hashId)) {
+          setActive(hashId);
+          return true;
+        }
+        return false;
+      };
+      const syncActiveFromScroll = () => {
+        if (window.scrollY <= 24) {
+          setActive("introduction");
+          return;
+        }
+        const probe = window.innerHeight * 0.24;
+        let current = sections[0];
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= probe) current = section;
+        });
+        if (current) setActive(current.id);
+      };
+      navTargets.forEach(({ link, id, section }) => {
+        if (!section) {
+          link.removeAttribute("href");
+          link.setAttribute("aria-disabled", "true");
+          return;
+        }
+        link.addEventListener("click", () => setActive(id));
+      });
+      if ("IntersectionObserver" in window && sections.length) {
+        const observer = new IntersectionObserver((entries) => {
+          const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          if (visible.length) setActive(visible[0].target.id);
+        }, { rootMargin: "-18% 0px -58% 0px", threshold: [0.2, 0.35, 0.55] });
+        sections.forEach((section) => observer.observe(section));
+      } else if (sections.length) {
+        window.addEventListener("scroll", syncActiveFromScroll, { passive: true });
+      }
+      window.addEventListener("hashchange", () => {
+        if (!syncActiveFromHash()) syncActiveFromScroll();
+      });
+      if (!syncActiveFromHash()) syncActiveFromScroll();
+
+      const copyToast = document.getElementById("copyToast");
+      let toastTimer;
+      const showCopyState = (button, originalLabel, message) => {
+        if (!button) return;
+        button.textContent = message;
+        button.classList.add("copied");
+        if (copyToast) {
+          copyToast.textContent = message === "Copied!" ? "Prompt copied to clipboard." : "Copy failed. Prompt selected instead.";
+          copyToast.classList.add("visible");
+        }
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(() => {
+          button.textContent = originalLabel;
+          button.classList.remove("copied");
+          if (copyToast) copyToast.classList.remove("visible");
+        }, 1800);
+      };
+      const fallbackCopy = (text) => {
+        const helper = document.createElement("textarea");
+        helper.value = text;
+        helper.setAttribute("readonly", "readonly");
+        helper.style.position = "fixed";
+        helper.style.opacity = "0";
+        helper.style.left = "-9999px";
+        document.body.appendChild(helper);
+        helper.select();
+        helper.setSelectionRange(0, helper.value.length);
+        let success = false;
+        try { success = document.execCommand("copy"); } catch (error) { success = false; }
+        document.body.removeChild(helper);
+        return success;
+      };
+      const copyText = async (text, button, originalLabel) => {
+        if (!text) return false;
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(text);
+            showCopyState(button, originalLabel, "Copied!");
+            return true;
+          }
+          const ok = fallbackCopy(text);
+          showCopyState(button, originalLabel, ok ? "Copied!" : "Selected");
+          return ok;
+        } catch (error) {
+          const ok = fallbackCopy(text);
+          showCopyState(button, originalLabel, ok ? "Copied!" : "Selected");
+          return ok;
+        }
+      };
+
+      const normalize = (value) => value ? value.replace(/\s+/g, " ").trim() : "";
+      const fieldMap = {
+        customerName: document.getElementById("customer-name"),
+        industry: document.getElementById("industry"),
+        hqRegions: document.getElementById("hq-regions"),
+        subsidiaries: document.getElementById("subsidiaries"),
+        locations: document.getElementById("locations"),
+        ciscoFootprint: document.getElementById("cisco-footprint"),
+        externalChannels: document.getElementById("external-channels"),
+        internalOrgs: document.getElementById("internal-orgs"),
+        painNews: document.getElementById("pain-news"),
+        focusArea: document.getElementById("focus-area")
+      };
+      const collectCustomerValues = () => Object.fromEntries(Object.entries(fieldMap).map(([key, el]) => [key, normalize(el ? el.value : "")]));
+      const requiredLine = (label, value) => `- ${label}: ${value || "(not provided — please research and assume)"}`;
+
+      const step0PromptEl = document.getElementById("generatedPrompt");
+      const step0PromptShell = document.getElementById("promptShell");
+      const generateButton = document.getElementById("generatePromptButton");
+      const regenerateButton = document.getElementById("regeneratePromptButton");
+      const copyButton = document.getElementById("copyPromptButton");
+      const step0CopyLabel = copyButton ? copyButton.textContent : "Copy prompt";
+      let currentPrompt = "";
+      const buildPrompt = () => {
+        const values = collectCustomerValues();
+        const focusAreaBlock = values.focusArea
+          ? [
+              `FOCUS AREA: I want to weight your recommendations toward ${values.focusArea}.`,
+              "Still surface 1–2 strong opportunities outside this focus for situational",
+              "awareness, but lead with this area."
+            ].join("\n")
+          : "";
+        return [
+          "You are a Cisco Contact Center and Customer Experience opportunity advisor helping",
+          "a generalist Cisco Sales Engineer prepare for a customer conversation. The SE has",
+          "limited prior expertise in contact center or collaboration technologies, so explain",
+          "in plain language and avoid heavy jargon (define any industry terms you do use).",
+          "",
+          "Here is what I know about my customer:",
+          "",
+          requiredLine("Customer name", values.customerName),
+          requiredLine("Industry / vertical", values.industry),
+          requiredLine("HQ and major regions", values.hqRegions),
+          requiredLine("Subsidiaries / brands / business units", values.subsidiaries),
+          requiredLine("Specific locations relevant to this account", values.locations),
+          requiredLine("Existing Cisco footprint", values.ciscoFootprint),
+          requiredLine("External-facing customer channels they appear to use", values.externalChannels),
+          requiredLine("Internal-facing service organizations they appear to operate", values.internalOrgs),
+          requiredLine("Known pain, news, or current initiatives", values.painNews),
+          focusAreaBlock,
+          "",
+          "Please respond in EXECUTIVE SUMMARY format. Be concise — no long preambles, no",
+          "exhaustive feature lists. Use clear headings, short bullets, and quantified figures.",
+          "",
+          "Deliver the following sections, in order:",
+          "",
+          "1. CUSTOMER SNAPSHOT (4-5 bullets max)",
+          "   Brief: industry, approximate size (employees / revenue / customers served / internal",
+          "   users), known footprint, and the 1-2 most relevant CC/CX dynamics for this kind of",
+          "   business — external and internal. Keep it tight.",
+          "",
+          "2. TOP 2 OPPORTUNITIES",
+          "   Pick the 2 strongest opportunities to pursue at this customer (covering external",
+          "   AND/OR internal contact-center / shared-service operations). For EACH opportunity:",
+          "",
+          "   a. Opportunity name (plain English, one line)",
+          "   b. Why this is a top 2 opportunity (2-3 bullets — fit, urgency, low friction,",
+          "      strategic alignment, vendor disruption, AI mandate, etc.)",
+          "   c. Customer financial impact (estimated annual value to the customer):",
+          "      - Quantify the business outcome in dollars where possible — e.g. deflection",
+          "        savings, retention lift revenue, agent productivity gains, cost-to-serve",
+          "        reduction, internal IT cost avoidance.",
+          "      - Show the math briefly (assumptions × scale = $) so the SE can defend it.",
+          "      - Give a range (low / likely / high) — be explicit about assumptions.",
+          "   d. Cisco opportunity size (estimated TCV over 3 years):",
+          "      - Estimated agents / users / interactions in scope",
+          "      - Approximate ARR and 3-year TCV range for Cisco (Webex CC, Webex AI,",
+          "        Webex Connect, services)",
+          "      - Be explicit about assumptions and confidence",
+          "   e. Relevant Cisco solutions (one line — Webex CC, Webex AI Agent, Webex AI Agent",
+          "      Assist, Webex Connect, etc.)",
+          "   f. Best persona to engage (by ROLE) and ONE door-opener for the next conversation",
+          "",
+          "3. CONFIDENCE & VERIFICATION (3-4 bullets max)",
+          "   Flag what you are GUESSING vs. inferring from public info vs. what the SE needs",
+          "   to verify before quoting any of the above figures externally.",
+          "",
+          "Constraints:",
+          "- Total response should fit on roughly one page when pasted into a doc.",
+          "- Use plain language for a generalist SE — define any contact center / AI jargon.",
+          "- Quantify wherever possible. \"It depends\" is not a useful answer; give a range",
+          "  with assumptions instead."
+        ].filter((line, index, arr) => !(line === "" && arr[index - 1] === "")).join("\n");
+      };
+      const renderPrompt = () => {
+        currentPrompt = buildPrompt();
+        if (step0PromptEl) step0PromptEl.textContent = currentPrompt;
+        if (step0PromptShell) step0PromptShell.classList.remove("placeholder");
+        if (regenerateButton) regenerateButton.hidden = false;
+        if (copyButton) copyButton.hidden = false;
+        return currentPrompt;
+      };
+      const copyGeneratedPrompt = async () => copyText(currentPrompt, copyButton, step0CopyLabel);
+      window.generateWorkshopPrompt = renderPrompt;
+      window.copyGeneratedWorkshopPrompt = copyGeneratedPrompt;
+      if (generateButton) generateButton.addEventListener("click", renderPrompt);
+      if (regenerateButton) regenerateButton.addEventListener("click", renderPrompt);
+      if (copyButton) copyButton.addEventListener("click", copyGeneratedPrompt);
+
+      const opportunityInput = document.getElementById("opportunity-input");
+      const opportunityError = document.getElementById("opportunity-error");
+      const matchingPromptEl = document.getElementById("matchingPrompt");
+      const matchingPromptShell = document.getElementById("matchingPromptShell");
+      const generateMatchButton = document.getElementById("generateMatchPromptButton");
+      const regenerateMatchButton = document.getElementById("regenerateMatchPromptButton");
+      const copyMatchButton = document.getElementById("copyMatchPromptButton");
+      const matchCopyLabel = copyMatchButton ? copyMatchButton.textContent : "Copy prompt";
+      let currentMatchPrompt = "";
+      const showOpportunityError = (show) => {
+        if (!opportunityInput || !opportunityError) return;
+        opportunityError.hidden = !show;
+        opportunityInput.classList.toggle("field-invalid", show);
+      };
+      const buildMatchPrompt = () => {
+        const values = collectCustomerValues();
+        const opportunity = normalize(opportunityInput ? opportunityInput.value : "");
+        if (!opportunity) {
+          showOpportunityError(true);
+          if (opportunityInput) opportunityInput.focus();
+          return null;
+        }
+        showOpportunityError(false);
+        const opener = `${values.customerName || "the customer above"}${values.industry ? `, ${values.industry}` : ""}${values.hqRegions ? `, ${values.hqRegions}` : ""}`;
+        return [
+          `Continuing from our prior conversation about my customer (${opener}).`,
+          "",
+          "Of the opportunities you ranked, I want to pursue this one:",
+          "",
+          opportunity,
+          "",
+          "Now help me develop USE CASES for this opportunity using Cisco's solutions. Respond in",
+          "EXECUTIVE SUMMARY format — concise, scannable, no long preambles, no exhaustive feature",
+          "lists. Use clear headings, short bullets, and quantified figures wherever possible.",
+          "",
+          "Deliver the following sections, in order:",
+          "",
+          "1. OPPORTUNITY FRAME (3-4 bullets max)",
+          "   - The business problem in one line, in the customer's language",
+          "   - Who at the customer feels this pain (persona / function)",
+          "   - The 1-2 measurable outcomes that would define success",
+          "   - Cisco solution(s) that apply (one line — Webex CC, Webex AI Agent, Webex AI Agent",
+          "     Assist, Webex Connect, Webex Calling, etc.)",
+          "",
+          "2. TOP 3 USE CASES (the core of this response)",
+          "   Develop 3 specific use cases at THIS customer (not generic). Pick the 3 with the",
+          "   highest combination of customer value and Cisco fit. For EACH use case, deliver:",
+          "",
+          "   a. Use case name (plain English, one line)",
+          "   b. Scenario (2-3 sentences) — the actual user/customer journey, what happens today",
+          "      vs. what happens with Cisco. Make it concrete to this customer's industry and",
+          "      business model.",
+          "   c. Cisco solution mapping — which specific Cisco capability delivers this and how",
+          "      (one short paragraph or 2-3 bullets, plain language)",
+          "   d. Quantified business outcome — name the metric and give a range:",
+          "      - Deflection %, AHT reduction, agent productivity gain, retention lift,",
+          "        cost-to-serve reduction, internal-user satisfaction lift, IT cost avoidance",
+          "      - Show the math briefly (assumptions × scale = outcome) so the SE can defend it",
+          "      - Estimated annual customer value in $ (low / likely / high)",
+          "   e. Why this use case wins — 1-2 bullets on what makes it credible at this customer",
+          "      (existing footprint, vendor situation, regulatory driver, AI mandate, peer story)",
+          "   f. Industry references (1-3 links) — news articles, customer success stories, press",
+          "      releases, analyst reports, or earnings-call quotes that SUPPORT THIS SPECIFIC",
+          "      USE CASE in this customer's industry. Each reference must include:",
+          "      - Title and publisher / source",
+          "      - Direct URL (must be real and resolvable — do not fabricate links)",
+          "      - One-line relevance: why this reference supports THIS use case at THIS customer",
+          "      Prefer industry-peer examples (same vertical, similar business model) over",
+          "      generic vendor marketing. If you cannot find credible references for this",
+          "      specific use case in this industry, simply state \"No supporting references",
+          "      found\" — do NOT invent URLs or fall back to unrelated stories.",
+          "",
+          "3. NEXT STEP (3-4 bullets max)",
+          "   - Best persona to engage (by ROLE)",
+          "   - The most credible door-opener for the next conversation (peer story, hands-on",
+          "     lab, workshop, tailored demo) — be specific about which one and why",
+          "   - 1-2 discovery questions to validate the strongest use case",
+          "",
+          "4. RISKS & VERIFICATION (3-4 bullets max)",
+          "   - Top 1-2 gaps, risks, or competitive considerations to be ready for (incumbent",
+          "     vendor, integration constraints, organizational politics, AI/data concerns)",
+          "   - What you are GUESSING vs. inferring vs. what the SE needs to verify before",
+          "     quoting use case figures externally",
+          "",
+          "Constraints:",
+          "- Total response should fit on roughly one page when pasted into a doc (industry",
+          "  references can extend it — that is fine)",
+          "- Plain language for a generalist SE — define any contact center / AI jargon",
+          "- Quantify wherever possible. Give ranges with assumptions instead of \"it depends\"",
+          "- NEVER fabricate URLs, articles, or quotes. If a reference cannot be verified, omit it."
+        ].join("\n");
+      };
+      const renderMatchPrompt = () => {
+        const prompt = buildMatchPrompt();
+        if (!prompt) return null;
+        currentMatchPrompt = prompt;
+        if (matchingPromptEl) matchingPromptEl.textContent = currentMatchPrompt;
+        if (matchingPromptShell) matchingPromptShell.classList.remove("placeholder");
+        if (regenerateMatchButton) regenerateMatchButton.hidden = false;
+        if (copyMatchButton) copyMatchButton.hidden = false;
+        return currentMatchPrompt;
+      };
+      const copyMatchPrompt = async () => copyText(currentMatchPrompt, copyMatchButton, matchCopyLabel);
+      window.generateMatchingWorkshopPrompt = renderMatchPrompt;
+      window.copyMatchingWorkshopPrompt = copyMatchPrompt;
+      if (generateMatchButton) generateMatchButton.addEventListener("click", renderMatchPrompt);
+      if (regenerateMatchButton) regenerateMatchButton.addEventListener("click", renderMatchPrompt);
+      if (copyMatchButton) copyMatchButton.addEventListener("click", copyMatchPrompt);
+      if (opportunityInput) {
+        opportunityInput.addEventListener("input", () => {
+          if (normalize(opportunityInput.value)) showOpportunityError(false);
+        });
+      }
+
+      const personaSelect = document.getElementById("persona-select");
+      const personaError = document.getElementById("persona-error");
+      const personaPromptEl = document.getElementById("personaPrompt");
+      const personaPromptShell = document.getElementById("personaPromptShell");
+      const generatePersonaButton = document.getElementById("generatePersonaPromptButton");
+      const regeneratePersonaButton = document.getElementById("regeneratePersonaPromptButton");
+      const copyPersonaButton = document.getElementById("copyPersonaPromptButton");
+      const personaCopyLabel = copyPersonaButton ? copyPersonaButton.textContent : "Copy prompt";
+      let currentPersonaPrompt = "";
+      const showPersonaError = (show) => {
+        if (!personaSelect || !personaError) return;
+        personaError.hidden = !show;
+        personaSelect.classList.toggle("field-invalid", show);
+      };
+      const buildPersonaPrompt = () => {
+        const selectedTitle = normalize(personaSelect ? personaSelect.value : "");
+        if (!selectedTitle) {
+          showPersonaError(true);
+          if (personaSelect) personaSelect.focus();
+          return null;
+        }
+        showPersonaError(false);
+        const template = [
+          "Continuing in the SAME chat thread — you already have the customer context (industry, footprint, internal/external service organizations, focus area, current pain) from the earlier pre-brief, and the use cases / opportunity context from the use-case development step.",
+          "",
+          "I have now picked ONE specific opportunity from Section 1 to pursue. I want to prepare for a discovery conversation with a {title} AT THIS SPECIFIC CUSTOMER, focused on validating and advancing THAT chosen opportunity.",
+          "",
+          "Use the opportunity I selected in Section 1 (the use case I chose to develop, with its scenario, Cisco solution mapping, and quantified outcome) as the ANCHOR for these questions. If I have not made the chosen opportunity explicit, infer it from the strongest use case you developed in the previous turn and state which one you anchored to.",
+          "",
+          "Generate 5 discovery questions that are tailored to ALL THREE:",
+          "  - The {title}'s worldview, accountability, and day-to-day pressures",
+          "  - This customer specifically — their industry, business model, footprint",
+          "  - The CHOSEN OPPORTUNITY from Section 1 — its scenario, the Cisco solution(s) it maps to, and the business outcome it is supposed to deliver",
+          "",
+          "Every question must move that specific opportunity forward — by surfacing the pain it addresses, validating an assumption behind the quantified outcome, exposing a blocker, or identifying who else needs to be in the room. Do NOT produce generic discovery questions or persona-only questions. If a question would land identically at any other customer or against any other opportunity, rewrite it.",
+          "",
+          "Before the 5 questions, briefly state in 1-2 lines:",
+          "  - The chosen opportunity you are anchoring to",
+          "  - The single business outcome these questions are designed to validate / advance",
+          "",
+          "For each of the 5 questions, use this exact structure:",
+          "",
+          "1. Question",
+          "   - Write the question exactly as the SE should ask it in a live meeting with this {title}.",
+          "   - Keep it plain-language, executive-friendly, and natural to say out loud.",
+          "   - Anchor the question in something concrete — the chosen opportunity, a known initiative, the customer's footprint, an internal org, a regulatory driver, or an assumption from the use case's quantified outcome.",
+          "",
+          "2. Why this works for this persona at this customer for this opportunity",
+          "   - Explain why this question is relevant to a {title} specifically.",
+          "   - Tie it to the chosen opportunity AND to what we already know about this customer.",
+          "",
+          "3. What a strong signal sounds like",
+          "   - Describe the kind of answer that would CONFIRM the chosen opportunity is real and worth advancing.",
+          "   - Be specific about what the SE should listen for — and call out answers that would WEAKEN the opportunity so the SE can disqualify early.",
+          "",
+          "4. Cisco mapping",
+          "   - Tie the answer back to the specific Cisco capability inside the chosen opportunity (Webex Contact Center, Webex AI Agent, Webex AI Agent Assist, Webex Connect, Webex Calling, or the combined story you already mapped).",
+          "   - If the answer would expand the deal beyond the chosen opportunity, name the adjacent capability and flag it as expansion (not the primary motion).",
+          "",
+          "5. Best follow-up move",
+          "   - Recommend the next move the SE should make if this {title} responds positively to THIS question — specifically to advance the chosen opportunity.",
+          "   - Be specific to this persona, this customer, and this opportunity — peer-customer story (name the peer if you have one), specialist intro, workshop, tailored demo, hands-on lab, executive briefing, or bringing in another stakeholder.",
+          "",
+          "Constraints:",
+          "- Anchor every question to the chosen Section 1 opportunity. Persona and customer tailoring are required, but the opportunity is the spine.",
+          "- Reuse the customer + opportunity context already loaded in this thread; do not ask me to re-paste it.",
+          "- Cover INTERNAL contact centers (IT help desk, HR shared services, employee support) only if the chosen opportunity involves them.",
+          "- Keep each question concise and conversation-ready.",
+          "- Avoid jargon unless necessary; if you use it, define it in plain English.",
+          "- If you are GUESSING about something at this customer or about the chosen opportunity (vs. inferring from earlier context), flag it briefly so the SE knows what to verify.",
+          "",
+          "Format the final answer as: a 1-2 line anchor statement, then 5 clearly separated numbered sections."
+        ].join("\n");
+        return template.replaceAll("{title}", selectedTitle);
+      };
+      const renderPersonaPrompt = () => {
+        const prompt = buildPersonaPrompt();
+        if (!prompt) return null;
+        currentPersonaPrompt = prompt;
+        if (personaPromptEl) personaPromptEl.textContent = currentPersonaPrompt;
+        if (personaPromptShell) personaPromptShell.classList.remove("placeholder");
+        if (regeneratePersonaButton) regeneratePersonaButton.hidden = false;
+        if (copyPersonaButton) copyPersonaButton.hidden = false;
+        return currentPersonaPrompt;
+      };
+      const copyPersonaPrompt = async () => copyText(currentPersonaPrompt, copyPersonaButton, personaCopyLabel);
+      window.generatePersonaWorkshopPrompt = renderPersonaPrompt;
+      window.copyPersonaWorkshopPrompt = copyPersonaPrompt;
+      if (generatePersonaButton) generatePersonaButton.addEventListener("click", renderPersonaPrompt);
+      if (regeneratePersonaButton) regeneratePersonaButton.addEventListener("click", renderPersonaPrompt);
+      if (copyPersonaButton) copyPersonaButton.addEventListener("click", copyPersonaPrompt);
+      if (personaSelect) {
+        personaSelect.addEventListener("change", () => {
+          if (normalize(personaSelect.value)) showPersonaError(false);
+        });
+      }
+
+      const emailTitleSelect = document.getElementById("email-title-select");
+      const emailToneSelect = document.getElementById("email-tone-select");
+      const emailTitleError = document.getElementById("email-title-error");
+      const emailToneError = document.getElementById("email-tone-error");
+      const emailPromptEl = document.getElementById("emailPrompt");
+      const emailPromptShell = document.getElementById("emailPromptShell");
+      const generateEmailButton = document.getElementById("generateEmailPromptButton");
+      const regenerateEmailButton = document.getElementById("regenerateEmailPromptButton");
+      const copyEmailButton = document.getElementById("copyEmailPromptButton");
+      const emailCopyLabel = copyEmailButton ? copyEmailButton.textContent : "Copy prompt";
+      let currentEmailPrompt = "";
+      const showEmailTitleError = (show) => {
+        if (!emailTitleSelect || !emailTitleError) return;
+        emailTitleError.hidden = !show;
+        emailTitleSelect.classList.toggle("field-invalid", show);
+      };
+      const showEmailToneError = (show) => {
+        if (!emailToneSelect || !emailToneError) return;
+        emailToneError.hidden = !show;
+        emailToneSelect.classList.toggle("field-invalid", show);
+      };
+      const buildEmailPrompt = () => {
+        const title = normalize(emailTitleSelect ? emailTitleSelect.value : "");
+        const tone = normalize(emailToneSelect ? emailToneSelect.value : "");
+        const lengthInput = document.querySelector('input[name="email-length"]:checked');
+        const length = normalize(lengthInput ? lengthInput.value : "Brief");
+        let hasError = false;
+        if (!title) {
+          showEmailTitleError(true);
+          hasError = true;
+        } else {
+          showEmailTitleError(false);
+        }
+        if (!tone) {
+          showEmailToneError(true);
+          if (!hasError) hasError = true;
+        } else {
+          showEmailToneError(false);
+        }
+        if (hasError) {
+          if (!title && emailTitleSelect) emailTitleSelect.focus();
+          else if (!tone && emailToneSelect) emailToneSelect.focus();
+          return null;
+        }
+        const template = [
+          "Continuing in the SAME chat thread — you already have the customer context (industry, footprint, internal/external service organizations, focus area, current pain) from Step 0b, the use cases from Section 1 (including the chosen opportunity I picked to pursue), and the discovery angle from the Section 2 questions.",
+          "",
+          "Draft an INTRODUCTORY EMAIL from me (a Cisco Systems Engineer) to a {title} at this customer. The email opens the door for a first conversation about the chosen opportunity.",
+          "",
+          "Recipient: {title}",
+          "Tone: {tone}",
+          "Length: {length}",
+          "",
+          "If length is \"Brief\": ~100-150 words. Single clear CTA. Cut everything that does not earn its place.",
+          "If length is \"Detailed\": ~250-350 words. Include framing, use case, Cisco capabilities, and explicit next steps as distinct beats.",
+          "",
+          "The email MUST include:",
+          "",
+          "1. Subject line (one short, specific line — not generic. Anchor it to the chosen opportunity or a credible peer signal, not \"Cisco solutions overview\".)",
+          "",
+          "2. Opening (1-2 sentences)",
+          "   - A credible reason for reaching out — anchored to something real about THIS customer (a known initiative, regulatory driver, public news, peer-customer story in the same industry, footprint Cisco already has).",
+          "   - Avoid \"I hope this email finds you well.\" Avoid generic vendor openers.",
+          "",
+          "3. Use case framing (1 short paragraph or 2-3 bullets)",
+          "   - The specific business problem the chosen opportunity addresses, in the {title}'s language.",
+          "   - The measurable outcome it would deliver (deflection %, AHT reduction, agent productivity, retention lift, cost-to-serve, internal-user satisfaction, IT cost avoidance — pick the metric that matters most to a {title}).",
+          "   - Reference the use case scenario you already developed in Section 1; do not invent a new one.",
+          "",
+          "4. Cisco capabilities (1 short paragraph or 2-3 bullets)",
+          "   - The specific Cisco capability or capabilities that deliver the outcome — Webex Contact Center, Webex AI Agent, Webex AI Agent Assist, Webex Connect, Webex Calling, or the combined story already mapped in Section 1.",
+          "   - Plain language. If a {title} would not use a term, define it inline or skip it.",
+          "   - One credible proof point if available (peer customer in the same industry, analyst recognition, named outcome). If you have no real proof point, OMIT this — do not fabricate.",
+          "",
+          "5. Next steps (CTA)",
+          "   - A SPECIFIC, low-friction next step appropriate to a {title} — 30-min discovery call, executive briefing, peer-customer reference call, hands-on lab invitation, tailored demo, or workshop.",
+          "   - Propose 2 concrete time windows OR ask the {title} to suggest one. Do not say \"let me know when works.\"",
+          "   - If a peer-customer story or hands-on lab fits this {title}, lead the CTA with that.",
+          "",
+          "6. Sign-off",
+          "   - Match the chosen tone.",
+          "   - Leave [Your name], [Your title], [Phone] as placeholders for the SE to fill in.",
+          "",
+          "Constraints:",
+          "- Tailor every paragraph to {title} + this customer + the chosen opportunity. Generic outreach is a fail.",
+          "- Match the {tone} consistently — do not slip into a different register mid-email.",
+          "- Reuse the customer + opportunity context already loaded in this thread; do not ask me to re-paste it.",
+          "- Do not invent customer details, peer references, or proof points. If unverified, omit.",
+          "- Output ONLY the email (subject line + body + sign-off). No preamble, no commentary, no \"Here is the email:\" framing."
+        ].join("\n");
+        return template.replaceAll("{title}", title).replaceAll("{tone}", tone).replaceAll("{length}", length);
+      };
+      const renderEmailPrompt = () => {
+        const prompt = buildEmailPrompt();
+        if (!prompt) return null;
+        currentEmailPrompt = prompt;
+        if (emailPromptEl) emailPromptEl.textContent = currentEmailPrompt;
+        if (emailPromptShell) emailPromptShell.classList.remove("placeholder");
+        if (regenerateEmailButton) regenerateEmailButton.hidden = false;
+        if (copyEmailButton) copyEmailButton.hidden = false;
+        return currentEmailPrompt;
+      };
+      const copyEmailPrompt = async () => copyText(currentEmailPrompt, copyEmailButton, emailCopyLabel);
+      window.generateIntroEmailWorkshopPrompt = renderEmailPrompt;
+      window.copyIntroEmailWorkshopPrompt = copyEmailPrompt;
+      if (generateEmailButton) generateEmailButton.addEventListener("click", renderEmailPrompt);
+      if (regenerateEmailButton) regenerateEmailButton.addEventListener("click", renderEmailPrompt);
+      if (copyEmailButton) copyEmailButton.addEventListener("click", copyEmailPrompt);
+      if (emailTitleSelect) {
+        emailTitleSelect.addEventListener("change", () => {
+          if (normalize(emailTitleSelect.value)) showEmailTitleError(false);
+        });
+      }
+      if (emailToneSelect) {
+        emailToneSelect.addEventListener("change", () => {
+          if (normalize(emailToneSelect.value)) showEmailToneError(false);
+        });
+      }
+
+      const proposalFormatSelect = document.getElementById("proposal-format-select");
+      const proposalCommercialSelect = document.getElementById("proposal-commercial-select");
+      const proposalPricingToggle = document.getElementById("proposal-pricing-toggle");
+      const proposalPromptEl = document.getElementById("proposalPrompt");
+      const proposalPromptShell = document.getElementById("proposalPromptShell");
+      const generateProposalButton = document.getElementById("generateProposalPromptButton");
+      const regenerateProposalButton = document.getElementById("regenerateProposalPromptButton");
+      const copyProposalButton = document.getElementById("copyProposalPromptButton");
+      const proposalCopyLabel = copyProposalButton ? copyProposalButton.textContent : "Copy prompt";
+      let currentProposalPrompt = "";
+      const buildProposalPrompt = () => {
+        const format = normalize(proposalFormatSelect ? proposalFormatSelect.value : "Executive summary (1 page)");
+        const commercial = normalize(proposalCommercialSelect ? proposalCommercialSelect.value : "Per-unit / buyable slice (e.g. per-office, per-business-unit)");
+        const pricing = proposalPricingToggle && proposalPricingToggle.checked ? "include pricing placeholders" : "leave commercial details abstract";
+        const template = [
+          "Continuing in the SAME chat thread — you already have the full customer context (industry, footprint, internal/external service organizations, focus area, current pain) from Step 0b, the use cases from Section 1 with the chosen opportunity I selected to pursue, the discovery angle from Section 2, and the intro email from Section 3.",
+          "",
+          "Draft a CUSTOMER-FACING PROPOSAL anchored to the chosen opportunity from Section 1.",
+          "",
+          "Format: {format}",
+          "Commercial framing: {commercial}",
+          "Pricing: {pricing}",
+          "",
+          "The proposal MUST follow this structure:",
+          "",
+          "1. Executive summary (always)",
+          "   - The business problem in the customer's language (1-2 sentences)",
+          "   - The proposed outcome and the measurable impact (with the quantified range from the Section 1 use case — low/likely/high)",
+          "   - The Cisco solution in one line",
+          "   - The commercial shape in one line (matching the {commercial} framing)",
+          "",
+          "2. The business problem",
+          "   - What is happening today at this customer that justifies action (anchor to what we already know — current pain, regulatory driver, vendor situation, internal-org dynamics, AI mandate)",
+          "   - What it costs the customer to do nothing (quantified where possible, using the same assumptions from the Section 1 use case)",
+          "   - Why now — the trigger or buying window",
+          "",
+          "3. The proposed solution",
+          "   - The chosen Section 1 use case, restated in customer-facing language (not Cisco internal jargon)",
+          "   - The specific Cisco capabilities that deliver it — Webex Contact Center, Webex AI Agent, Webex AI Agent Assist, Webex Connect, Webex Calling — only the ones that apply to THIS opportunity, not a feature catalog",
+          "   - How it integrates with what the customer already has (existing Cisco footprint, incumbent platforms, key systems of record)",
+          "   - One credible proof point if available (peer customer in the same industry, named outcome, analyst recognition). If you have no real proof point, OMIT — do not fabricate.",
+          "",
+          "4. The business outcome",
+          "   - The metric this opportunity moves (deflection %, AHT reduction, agent productivity, retention lift, cost-to-serve, internal-user satisfaction, IT cost avoidance)",
+          "   - The math — assumptions × scale = outcome (so the customer can defend the number internally)",
+          "   - The range — low / likely / high — with a one-line note on what swings the result",
+          "   - Time to value — when the customer would see the first measurable lift",
+          "",
+          "5. Commercial shape ({commercial})",
+          "   - The buyable unit and how it scales (per office, per business unit, per channel, per platform, etc.)",
+          "   - Implementation scope and timeline",
+          "   - Post-implementation support model",
+          "   - {pricing}",
+          "",
+          "6. The pilot or first phase",
+          "   - Specific scope — footprint, channels, agent count, or use case slice",
+          "   - Success criteria — what proves the pilot worked",
+          "   - Decision point — what the customer commits to next if the pilot succeeds",
+          "   - Timeline — start, pilot duration, expansion decision date",
+          "",
+          "7. Expansion path",
+          "   - Where this goes after the pilot — broader rollout, adjacent use cases, additional Cisco capabilities",
+          "   - The 12-24 month vision in 2-3 sentences (not a feature roadmap)",
+          "",
+          "8. Why Cisco",
+          "   - 2-3 short bullets specific to this customer and this opportunity (existing footprint, peer-customer outcomes, AI maturity, integration with their current stack, regulatory fit)",
+          "   - Avoid generic \"Cisco is a leader in...\" statements",
+          "",
+          "9. Next steps",
+          "   - The specific action the customer needs to take to move this forward (sign off on pilot scope, attend a workshop, agree to a discovery deep-dive, schedule a peer-customer reference call)",
+          "   - Named owner from Cisco side (placeholder: [Cisco lead name])",
+          "   - Two proposed dates for the next conversation",
+          "",
+          "Format-specific rules:",
+          "- If format is \"Executive summary (1 page)\": collapse sections 2-9 into tight paragraphs or bullets, total ~400-500 words. Keep all sections present but compressed.",
+          "- If format is \"Detailed proposal (3-5 pages)\": expand each section with sub-bullets, integration detail, and risk/mitigation notes. Add an appendix-style \"Assumptions\" block after section 9.",
+          "- If format is \"Pilot scoping document\": lead with sections 6 (pilot) and 4 (business outcome). Compress 1-3 and 7-9 into a brief framing wrapper.",
+          "- If format is \"Business case / ROI-focused\": lead with section 4 (business outcome). Make the math the spine of the document. Compress everything else.",
+          "",
+          "Constraints:",
+          "- Anchor every section to the chosen Section 1 opportunity. This is not a generic Cisco proposal.",
+          "- Reuse the customer + opportunity + use case + email context already loaded in this thread; do not ask me to re-paste it.",
+          "- Customer-facing tone — the customer reads this, not Cisco internal. No \"the SE should...\", no Cisco internal jargon.",
+          "- Quantify wherever possible. Show the math.",
+          "- Do NOT invent customer details, peer references, named proof points, or specific dollar figures beyond the placeholder convention.",
+          "- If you are GUESSING about something at this customer (vs. inferring from earlier context), flag it in a brief \"Assumptions to verify\" note at the end so the SE knows what to confirm before sending.",
+          "",
+          "Output ONLY the proposal content. No preamble, no commentary, no \"Here is the proposal:\" framing."
+        ].join("\n");
+        return template.replaceAll("{format}", format).replaceAll("{commercial}", commercial).replaceAll("{pricing}", pricing);
+      };
+      const renderProposalPrompt = () => {
+        currentProposalPrompt = buildProposalPrompt();
+        if (proposalPromptEl) proposalPromptEl.textContent = currentProposalPrompt;
+        if (proposalPromptShell) proposalPromptShell.classList.remove("placeholder");
+        if (regenerateProposalButton) regenerateProposalButton.hidden = false;
+        if (copyProposalButton) copyProposalButton.hidden = false;
+        return currentProposalPrompt;
+      };
+      const copyProposalPrompt = async () => copyText(currentProposalPrompt, copyProposalButton, proposalCopyLabel);
+      window.generateProposalWorkshopPrompt = renderProposalPrompt;
+      window.copyProposalWorkshopPrompt = copyProposalPrompt;
+      if (generateProposalButton) generateProposalButton.addEventListener("click", renderProposalPrompt);
+      if (regenerateProposalButton) regenerateProposalButton.addEventListener("click", renderProposalPrompt);
+      if (copyProposalButton) copyProposalButton.addEventListener("click", copyProposalPrompt);
+    }());
+  </script>
+</body>
+</html>
