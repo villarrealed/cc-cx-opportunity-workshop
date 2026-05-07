@@ -13,9 +13,11 @@ Plus static teaching content for opportunity identification, qualification, spec
 
 ## View the workshop
 
-Open `opportunity-identification-framework.html` directly, or [view it live on GitHub Pages](https://villarrealed.github.io/cc-cx-opportunity-workshop/opportunity-identification-framework.html).
+- **Live (Render):** https://cc-cx-opportunity-workshop.onrender.com/
+- **Live (GitHub Pages):** https://villarrealed.github.io/cc-cx-opportunity-workshop/
+- Or open `index.html` directly from a local clone.
 
 ## Files
 
-- `opportunity-identification-framework.html` — the workshop (self-contained, no build needed)
+- `index.html` — the workshop (self-contained, no build needed)
 - `opportunity-identification-framework.md` — markdown source of truth
