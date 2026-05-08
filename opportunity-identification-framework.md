@@ -140,7 +140,10 @@ These pieces are **designed to work together as one platform**. Here is the stor
 - **Webex AI Agent** answers the simple, repetitive questions on its own — checking an order, resetting a password, booking an appointment — so customers get instant answers and human agents are freed up for the harder conversations.
 - When a human agent is needed, **Webex AI Agent Assist** works alongside them in real time — suggesting answers, summarizing the conversation, and surfacing the next best step so every agent sounds like an expert.
 - **Webex Connect** handles the proactive side of the conversation — appointment reminders, delivery updates, two-way messaging on SMS or WhatsApp — and seamlessly hands the customer over to a live agent if the conversation needs to escalate.
+- Underneath it all, **Webex Calling** is the cloud voice platform that powers every conversation — for contact center agents, back-office experts, and the rest of the workforce. One vendor, one voice platform, one bill — instead of stitching together a contact center from one provider and business calling from another.
 - Because it is one platform, everything the customer says and does flows into a single view — so the business can see what is working, fix what is not, and keep improving the experience over time.
+
+**Why this matters:** Cisco is the only vendor that delivers all of it — contact center, AI for self-service, AI for agents, proactive digital messaging, and the underlying cloud calling platform — natively integrated. Customers stop managing five vendors and start running one platform.
 
 That's the story. You don't need to memorize every product detail — you need to recognize which of those pieces a customer's pain points point to, and bring the right specialist (CC SE, AI/Connect SE, CX engineering) in to go deeper.
 
