@@ -1,4 +1,4 @@
-# CC/CX Opportunity Identification Framework — One-Pager
+# Generate Pipeline Through AI-Assisted Customer Discovery
 
 **For:** Cisco Sales Engineers — **generalist SEs** with little to no prior contact center or collaboration expertise.
 **Use:** Spot Contact Center / Customer Experience opportunities inside accounts that don't necessarily *look* like CC accounts.
