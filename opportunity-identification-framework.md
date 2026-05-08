@@ -1,6 +1,6 @@
 # Consultative Discovery with AI
 
-**For:** Cisco Sales Engineers — **generalist SEs** with little to no prior contact center or collaboration expertise.
+**For:** Cisco sellers — AMs, AEs, SEs, and specialists. No prior contact center or collaboration expertise required.
 **Use:** Spot Contact Center / Customer Experience opportunities inside accounts that don't necessarily *look* like CC accounts.
 
 > **Plain-language framing.** This guide uses some industry terms (CCaaS, IVR, omnichannel, AHT, NPS, deflection, Webex AI). Each is defined the first time it appears. You do **not** need to be a CC specialist to use this. Your job here is to *recognize* an opportunity and pull the right Cisco people in — not to become the technical expert.
@@ -10,14 +10,14 @@
 ### What it is
 
 - A 1-hour module within a half-day Cisco workshop.
-- Designed for **generalist** Cisco Sales Engineers — no prior CC/CX or collaboration expertise required.
-- A guided, AI-assisted flow that takes the SE from a cold customer name to four ready-to-use artifacts: a customer pre-brief, a chosen opportunity with use case, a tailored intro email + 5 discovery questions, and a customer-facing proposal.
+- Designed for **any Cisco seller** — AMs, AEs, SEs, and specialists. No prior CC/CX or collaboration expertise required.
+- A guided, AI-assisted flow that takes the seller from a cold customer name to four ready-to-use artifacts: a customer pre-brief, a chosen opportunity with use case, a tailored intro email + 5 discovery questions, and an outline for a customer proposal.
 - Built around a single chat thread in **[Cisco CIRCUIT](https://circuit.cisco.com)** so each generated prompt builds on the prior one with full customer context.
 
 ### What it does
 
 - Teaches how to identify CC/CX opportunities at any account — including **internal** contact centers like IT help desk, HR shared services, and employee support, not just external customer-facing ones.
-- Translates the Cisco CC/CX portfolio into plain language a generalist SE can actually use: Webex Contact Center, Webex AI Agent, Webex AI Agent Assist, Webex Connect, and Webex Calling.
+- Translates the Cisco CC/CX portfolio into plain language any seller can actually use: Webex Contact Center, Webex AI Agent, Webex AI Agent Assist, Webex Connect, and Webex Calling.
 - Produces concrete, account-specific artifacts in the session — not abstract frameworks.
 - Equips the SE to open a credible CC/CX conversation with a named persona at a real account, then take the resulting proposal back to the AM and the CC/AI specialist for refinement.
 
