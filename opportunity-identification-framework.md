@@ -172,20 +172,20 @@ Use these in any meeting — even meetings that aren't about CC. They take ~3 mi
 
 Use the static 5 questions in your **first** conversation when you know very little about the account. Use the persona-tailored generator once you know who you are meeting and already have customer context loaded in the same CIRCUIT thread. The static questions surface the opportunity; the tailored questions advance it.
 
-1. **"Where in your business do people — customers OR employees — go when they need help?"**
-   → Surfaces every service path the organization runs, including customer-facing journeys and internal support motions that IT may not fully own.
+1. **"When your customers — or your own employees — need help, where do they go and how do they reach you?"**
+   → Surfaces every place the business answers questions or solves problems — the customer call center, the website chat, the IT help desk, HR support, the in-store team. Many companies have several of these and don't realize they all face the same challenges.
 
-2. **"What does the experience look like today across those channels — for customers AND for employees who need internal support?"**
-   → Surfaces fragmentation, channel silos, and inconsistency across voice, chat, digital, in-person, and internal-service journeys. Cisco's *omnichannel* story lands here.
+2. **"What does that experience feel like today — for the person asking, and for the people answering?"**
+   → Surfaces whether the experience is consistent or fragmented. Do customers have to repeat themselves? Do employees jump between five tools to answer one question? This is where the case for one connected platform starts to land.
 
-3. **"What are you measuring — and what are you being asked to improve this year?"**
-   → Surfaces the business outcome (retention, deflection, AHT, NPS, cost-to-serve, or internal-support efficiency). This is what the proposal will be tied to, not features.
+3. **"What are you measured on, and what are you being asked to improve this year?"**
+   → Surfaces the business outcome the customer cares about — happier customers, faster answers, lower cost, fewer complaints, more loyalty. This becomes the anchor of the proposal. If they cannot name a measurable target, the opportunity is not real yet.
 
-4. **"Where are you using — or thinking about using — AI to help customers OR employees get answers faster?"**
-   → Surfaces opportunities for **AI Agent** and **AI Agent Assist** across both customer-facing and internal-service environments. Maps to Webex AI directly.
+4. **"Where are you using — or thinking about using — AI to help people get answers faster?"**
+   → Surfaces whether AI is on their roadmap, who is pushing for it, and whether they are looking at it for customer-facing service, internal employee support, or both. Almost every executive has an AI mandate this year — this question makes it specific.
 
-5. **"What's getting in the way today — vendor, platform, integration, cost, agent experience?"**
-   → Surfaces the wedge: CCaaS / UCaaS renewal, a failing **IVR** (Interactive Voice Response — the "press 1 for…" phone menu), an internal help-desk platform gap, a Salesforce integration issue, or unsustainable per-agent / per-channel cost pressure.
+5. **"What is getting in the way today — the tools, the cost, the vendor, or how everything is connected?"**
+   → Surfaces the reason to act now. Maybe a contract is up for renewal. Maybe the current system cannot do what the business needs. Maybe costs are climbing. Maybe agents are frustrated. This is where Cisco's "one platform" story becomes the practical answer to a real problem.
 
 **How to read answers**
 
