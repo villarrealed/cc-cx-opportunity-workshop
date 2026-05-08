@@ -26,7 +26,7 @@
 - **Not** a deep-dive into Webex Contact Center features, CCaaS architecture, or implementation detail — that remains the specialist's job.
 - **Not** a replacement for the CC/AI specialist team — this is the qualification and door-opening motion that happens before the specialist gets engaged.
 - **Not** a one-size-fits-all script — every artifact is tailored to the specific customer, opportunity, and persona being pursued.
-- **Not** a substitute for human judgment — the AI generates strong starting drafts, but the SE and account team validate, correct, and refine before anything goes to the customer.
+- **Not** a finished deliverable — the AI produces strong starting drafts; the seller and account team still validate, correct, and refine every artifact before it reaches the customer.
 
 ---
 
