@@ -19,7 +19,7 @@
 - Teaches how to identify CC/CX opportunities at any account — including **internal** contact centers like IT help desk, HR shared services, and employee support, not just external customer-facing ones.
 - Translates the Cisco CC/CX portfolio into plain language any seller can actually use: Webex Contact Center, Webex AI Agent, Webex AI Agent Assist, Webex Connect, and Webex Calling.
 - Produces concrete, account-specific artifacts in the session — not abstract frameworks.
-- Equips the SE to open a credible CC/CX conversation with a named persona at a real account, then take the resulting proposal back to the AM and the CC/AI specialist for refinement.
+- Equips the seller to open a credible CC/CX conversation with a named persona at a real account, then take the resulting proposal outline back to the account team and the CC/AI specialist for refinement.
 
 ### What it is not
 
@@ -71,7 +71,7 @@ If you specified a **focus area** in Step 0a (e.g. internal IT help desk, dealer
 
 ### Step 0c — Use the output as your starting point
 
-Take the AI's ranked opportunity list into the rest of this guide. As you walk through the discovery scan, persona map, and qualification checklist below, use the AI's output to:
+Take the AI's ranked opportunity list into the rest of this guide. As you walk through the discovery scan, persona generator, and qualification gate below, use the AI's output to:
 
 - Pick **one opportunity** to focus on for this exercise
 - Identify **one persona** to target an introduction to
@@ -105,7 +105,7 @@ Now that you have a ranked list of opportunities from your AI pre-brief (Step 0b
 - **External:** retail customer service, insurance claims, banking call center, telco support
 - **Internal:** IT help desk, HR shared services, employee benefits support, internal facilities / employee service desk
 
-### The three Cisco solutions you'll lead with
+### The Cisco solutions you'll lead with
 
 **Webex Contact Center (Webex CC) — the cloud platform for customer conversations.**
 - *What it is in plain terms:* The cloud-delivered system that runs the customer's contact center — handles inbound calls, routes them to the right agent or queue, integrates with their CRM (e.g. Salesforce), gives supervisors dashboards, and provides reporting on what happened. Replaces or modernizes whatever they're using today (Genesys, Five9, NICE, Avaya, Cisco UCCE, or homegrown).
@@ -125,6 +125,11 @@ Now that you have a ranked list of opportunities from your AI pre-brief (Step 0b
 - *Examples of where it fits:* Customer wants to launch WhatsApp / SMS / RCS for service. Customer is running 3-4 different vendors for SMS, chat, and email and wants to consolidate. Customer wants proactive outbound (appointment reminders, payment reminders, fraud alerts, delivery updates). Customer wants to deflect from voice into digital but doesn't have the tools.
 - *When to lead with it:* When the conversation is about *digital* — SMS/WhatsApp/RCS, mobile app messaging, omnichannel — or about *proactive* customer communication, not just inbound voice.
 
+**Webex Calling — the cloud voice platform underneath it all.**
+- *What it is in plain terms:* The cloud voice platform that powers every business conversation — for contact center agents, back-office experts, and the rest of the workforce. Replaces aging on-prem PBXs and fragmented regional calling vendors with one cloud calling service that natively connects to Webex Contact Center and the rest of the platform.
+- *Examples of where it fits:* Customer is retiring an aging on-prem PBX or end-of-life calling system. Customer is consolidating regional calling vendors after M&A. Customer wants to unify business calling and contact center on one platform and one bill. Customer wants back-office experts on the same calling platform as contact center agents.
+- *When to lead with it:* When the customer has a calling-platform decision in flight — PBX retirement, post-M&A consolidation, or a desire to converge business calling and contact center under one vendor.
+
 ### How they fit together (the "One Cisco" story)
 
 These pieces are **designed to work together as one platform**. Here is the story in plain language — the same way you would tell it to a customer:
@@ -134,9 +139,9 @@ These pieces are **designed to work together as one platform**. Here is the stor
 - When a human agent is needed, **Webex AI Agent Assist** works alongside them in real time — suggesting answers, summarizing the conversation, and surfacing the next best step so every agent sounds like an expert.
 - **Webex Connect** handles the proactive side of the conversation — appointment reminders, delivery updates, two-way messaging on SMS or WhatsApp — and seamlessly hands the customer over to a live agent if the conversation needs to escalate.
 - Underneath it all, **Webex Calling** is the cloud voice platform that powers every conversation — for contact center agents, back-office experts, and the rest of the workforce. One vendor, one voice platform, one bill — instead of stitching together a contact center from one provider and business calling from another.
-- Because it is one platform, everything the customer says and does flows into a single view — so the business can see what is working, fix what is not, and keep improving the experience over time.
+- Because it is one platform, the conversation, context, and history flow together across these pieces — so the business gets a more connected view, can see what is working, fix what is not, and keep improving the experience over time.
 
-**Why this matters:** Cisco is the only vendor that delivers all of it — contact center, AI for self-service, AI for agents, proactive digital messaging, and the underlying cloud calling platform — natively integrated. Customers stop managing five vendors and start running one platform.
+**Why this matters:** Cisco delivers all of it as a single-vendor, natively built platform — contact center, AI for self-service, AI for agents, proactive digital messaging, and the underlying cloud calling platform. Customers stop stitching together five vendors and managing the integrations themselves, and start running one connected platform with one roadmap.
 
 That's the story. You don't need to memorize every product detail — you need to recognize which of those pieces a customer's pain points point to, and bring the right specialist (CC SE, AI/Connect SE, CX engineering) in to go deeper.
 
@@ -177,8 +182,8 @@ Use the static 5 questions in your **first** conversation when you know very lit
 4. **"Where are you using — or thinking about using — AI to help people get answers faster?"**
    → Surfaces whether AI is on their roadmap, who is pushing for it, and whether they are looking at it for customer-facing service, internal employee support, or both. Almost every executive has an AI mandate this year — this question makes it specific.
 
-5. **"What is getting in the way today — the tools, the cost, the vendor, or how everything is connected?"**
-   → Surfaces the reason to act now. Maybe a contract is up for renewal. Maybe the current system cannot do what the business needs. Maybe costs are climbing. Maybe agents are frustrated. This is where Cisco's "one platform" story becomes the practical answer to a real problem.
+5. **"What is blocking you from improving this today — and is there a contract, project, or deadline that is forcing your hand?"**
+   → Surfaces the two things that turn an opportunity into a deal: **the wedge** (what is in the way today — vendor, cost, integration, or capability gap) and **the timing** (a contract renewal, a board mandate, a regulatory date, or a budget cycle). If both show up, you have a real opportunity now.
 
 **How to read answers**
 
@@ -232,7 +237,7 @@ The workshop page now turns Section 3 into an email-drafting generator. The SE p
 
 Before generating the proposal, confirm the four qualification checks from Section 2 — **Problem / Person / Trigger / Path**. If you have all 4, the proposal is ready for customer-facing refinement. If you have 2-3, treat the output as internal-only. If you have 0-1, go back to discovery first — the proposal will be hollow.
 
-Section 4 now generates the customer-facing proposal as a continuation of the same chat thread. The SE picks a proposal format (**Executive summary (1 page)**, **Detailed proposal (3-5 pages)**, **Pilot scoping document**, or **Business case / ROI-focused**), chooses a commercial framing (**Per-unit / buyable slice**, **Single platform deal**, **Pilot then expand**, or **Phased rollout**), and decides whether to include pricing placeholders. The AI then drafts a proposal anchored to the chosen Section 1 opportunity, structured around executive summary, business problem, proposed solution, business outcome, commercial shape, pilot / first phase, expansion path, why Cisco, and next steps. Format-specific rules compress or expand those sections based on the selected document type.
+Section 4 now generates a proposal outline as a continuation of the same chat thread. The seller picks a proposal format (**Executive summary (1 page)**, **Detailed proposal (3-5 pages)**, **Pilot scoping document**, or **Business case / ROI-focused**), chooses a commercial framing (**Per-unit / buyable slice**, **Single platform deal**, **Pilot then expand**, or **Phased rollout**), and decides whether to include pricing placeholders. The AI then drafts a proposal outline anchored to the chosen Section 1 opportunity, structured around executive summary, business problem, proposed solution, business outcome, commercial shape, pilot / first phase, expansion path, why Cisco, and next steps. Format-specific rules compress or expand those sections based on the selected document type. The output is a starting draft for the account team and CC/AI specialist to refine — not a finished customer deliverable.
 
 ---
 
@@ -243,6 +248,6 @@ The workshop now produces four concrete downstream artifacts around one account 
 - **One AI pre-brief** — the Step 0b output with the top 2 opportunities, customer financial impact ranges, and Cisco TCV estimates in the same CIRCUIT thread.
 - **One chosen opportunity + use case** — the Section 1 use case selected to pursue, with quantified outcome, Cisco mapping, and supporting industry reference(s).
 - **One persona + intro email + 5 discovery questions** — the Section 2 and Section 3 outputs ready to use for outreach and the first meeting.
-- **One proposal draft** — the Section 4 customer-facing proposal, in the format and commercial shape that match the customer's buying motion, ready for AM / CC specialist refinement.
+- **One proposal draft** — the Section 4 proposal outline, in the format and commercial shape that match the customer's buying motion. A starting draft for the account team and CC/AI specialist to refine before it reaches the customer.
 
 That is the unit of progress: one account, one opportunity, four ready-to-use artifacts, one next move.
