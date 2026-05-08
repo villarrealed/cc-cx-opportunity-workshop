@@ -105,13 +105,6 @@ Now that you have a ranked list of opportunities from your AI pre-brief (Step 0b
 - **External:** retail customer service, insurance claims, banking call center, telco support
 - **Internal:** IT help desk, HR shared services, employee benefits support, internal facilities / employee service desk
 
-**What to ignore (for now)**
-- Pure calling / UCaaS refresh with no service angle
-- Individual agent tools with no platform play
-- Single-team chatbot experiments with no enterprise scope
-
-Park those for now — they may be real projects, but not necessarily CC/CX deals.
-
 ### The three Cisco solutions you'll lead with
 
 **Webex Contact Center (Webex CC) — the cloud platform for customer conversations.**
