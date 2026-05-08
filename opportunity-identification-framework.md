@@ -134,15 +134,15 @@ Park those for now — they may be real projects, but not necessarily CC/CX deal
 
 ### How they fit together (the "One Cisco" story)
 
-These three are **designed to work together as one platform**. A typical mature deployment looks like:
+These pieces are **designed to work together as one platform**. Here is the story in plain language — the same way you would tell it to a customer:
 
-- A customer calls in → Webex CC routes it.
-- Webex AI Agent answers first and handles 30-50% of intents end-to-end (no human needed).
-- For everything else, Webex CC routes to a human agent — and Webex AI Agent Assist sits next to that agent in real time.
-- Webex Connect runs the digital side (SMS reminders, WhatsApp service, proactive outbound) — and any digital interaction can be escalated into Webex CC if the customer wants to talk to a human.
-- All of it produces unified data the customer can act on.
+- A customer reaches out — by phone, chat, email, or messaging app. **Webex Contact Center** receives the contact and connects it to the right place.
+- **Webex AI Agent** answers the simple, repetitive questions on its own — checking an order, resetting a password, booking an appointment — so customers get instant answers and human agents are freed up for the harder conversations.
+- When a human agent is needed, **Webex AI Agent Assist** works alongside them in real time — suggesting answers, summarizing the conversation, and surfacing the next best step so every agent sounds like an expert.
+- **Webex Connect** handles the proactive side of the conversation — appointment reminders, delivery updates, two-way messaging on SMS or WhatsApp — and seamlessly hands the customer over to a live agent if the conversation needs to escalate.
+- Because it is one platform, everything the customer says and does flows into a single view — so the business can see what is working, fix what is not, and keep improving the experience over time.
 
-That's the story. You don't need to memorize every product detail — you need to recognize which of those three a customer's pain points point to, and bring the right specialist (CC SE, AI/Connect SE, CX engineering) in to go deeper.
+That's the story. You don't need to memorize every product detail — you need to recognize which of those pieces a customer's pain points point to, and bring the right specialist (CC SE, AI/Connect SE, CX engineering) in to go deeper.
 
 ### Generate your "match Cisco to my opportunity" prompt
 
