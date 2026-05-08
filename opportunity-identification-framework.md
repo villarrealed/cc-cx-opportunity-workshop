@@ -36,7 +36,7 @@ Before you work through the rest of this guide, spend 5 minutes giving an AI ass
 
 ### Step 0a — Capture what you know about the customer
 
-Fill in as much as you can. Don't worry about gaps — even just the customer name is enough to get value.
+Fill in as much as you can. Don't worry about gaps — even just the customer name is enough to get value. To fill gaps faster, pull from **AI Assistant for Sales** (in Webex), **ZoomInfo**, or other account-research tools you already use.
 
 - **Customer name:**
 - **Industry / vertical:**
